@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2819d117-4993-46a1-8b41-19310296c5e0" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/../../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +25,7 @@
         </counts>
       </usages-collector>
     </session>
+<<<<<<< Updated upstream
     <session id="132136190">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
@@ -53,6 +58,17 @@
         </entry>
       </file>
     </leaf>
+=======
+    <session id="-1287117437">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+>>>>>>> Stashed changes
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -61,7 +77,7 @@
     <option name="x" value="260" />
     <option name="y" value="20" />
     <option name="width" value="1400" />
-    <option name="height" value="982" />
+    <option name="height" value="983" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -74,6 +90,7 @@
         <subPane>
           <expand>
             <path>
+<<<<<<< Updated upstream
               <item name="." type="b2602c69:ProjectViewProjectNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -153,6 +170,21 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="es-go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="es-go" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="es-go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="es-go" type="462c0819:PsiDirectoryNode" />
+              <item name="ExcecutiveSchedulerGO" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="es-go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="es-go" type="462c0819:PsiDirectoryNode" />
+              <item name="ExcecutiveSchedulerGO" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+>>>>>>> Stashed changes
             </path>
           </expand>
           <select />
@@ -160,6 +192,9 @@
       </pane>
       <pane id="Scope" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -187,10 +222,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="0" y="0" width="1920" height="1022" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23864837" />
+=======
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info id="Captures" order="0" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23529412" />
+>>>>>>> Stashed changes
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
