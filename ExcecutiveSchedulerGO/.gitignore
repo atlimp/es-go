@@ -2,6 +2,7 @@
 .gradle
 /local.properties
 /.idea/
+/ExcecutiveSchedulerGO/.idea/
 .DS_Store
 /build
 /captures
