@@ -1,4 +1,4 @@
-package com.example.executiveschedulergo;
+package com.example.excecutiveschedulergo;
 
 import org.junit.Test;
 

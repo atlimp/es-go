@@ -1,4 +1,4 @@
-package com.example.executiveschedulergo;
+package com.example.excecutiveschedulergo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
