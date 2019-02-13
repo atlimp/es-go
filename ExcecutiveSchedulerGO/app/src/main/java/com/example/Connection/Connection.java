@@ -17,6 +17,7 @@ public class Connection {
     private User user;
 
     private Connection() {
+        user = new User();
     }
 
     public static Connection getInstance() {
