@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 username = mUsernameField.getText().toString();
+                // ...Maybe hash before sending.
                 password = mPasswordField.getText().toString();
                 sendResult();
             }
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendResult(){
-        // From https://stackoverflow.com/questions/19666572/how-to-call-a-method-in-another-activity-from-activity
+        // From https://stackoverflow.com/a/39578803
         Intent intent=new Intent();
         intent.putExtra("Username", username);
         intent.putExtra("Password", password);

@@ -1,5 +1,7 @@
 package com.example.Connection;
 
+import com.example.model.User;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -12,7 +14,7 @@ public class Connection {
 
     private static Connection instance = new Connection();
     private String URL = "https://apis.is/cars";
-
+    private User user;
     private Connection() {
     }
 
@@ -49,6 +51,7 @@ public class Connection {
         });
         return null;
     }
-
     */
+
+
 }
