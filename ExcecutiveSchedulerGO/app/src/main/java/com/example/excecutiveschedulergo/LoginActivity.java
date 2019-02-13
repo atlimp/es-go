@@ -27,6 +27,21 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login() { }
 
+    /**
+     * From https://stackoverflow.com/a/39578803
+     * Sends activity result back to mainActivity.
+     */
+    private void sendResult(){
+        Intent intent=new Intent();
+        intent.putExtra("Username", username);
+        intent.putExtra("Password", password);
+        setResult(1,intent);
+        finish(); //finishing activity
+    }
+
+    /**
+     * Set all listeners
+     */
     private void setListeners(){
         mLoginButton = findViewById(R.id.loginButton);
 
@@ -87,14 +102,5 @@ public class LoginActivity extends AppCompatActivity {
                 sendResult();
             }
         });
-    }
-
-    private void sendResult(){
-        // From https://stackoverflow.com/a/39578803
-        Intent intent=new Intent();
-        intent.putExtra("Username", username);
-        intent.putExtra("Password", password);
-        setResult(1,intent);
-        finish(); //finishing activity
     }
 }

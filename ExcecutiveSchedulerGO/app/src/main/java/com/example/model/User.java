@@ -62,9 +62,7 @@ public class User {
         this.token = token;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
+    public List<Event> getEvents() { return events; }
 
     public void setEvents(List<Event> events) {
         this.events = events;

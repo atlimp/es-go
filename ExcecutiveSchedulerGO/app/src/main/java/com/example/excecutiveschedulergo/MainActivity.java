@@ -2,7 +2,6 @@ package com.example.excecutiveschedulergo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             Intent login = new Intent(getApplicationContext(), LoginActivity.class);
             startActivityForResult(login,1);
         } else {
+            // TODO: This should be deleted at some point.
             Log.e("Main activity on create: ", "login info: " + lastUser[0] +","+lastUser[1]);
             username = lastUser[0];
             password = lastUser[1];
@@ -60,20 +60,31 @@ public class MainActivity extends AppCompatActivity {
         setLastUser();
     }
 
-    // From https://stackoverflow.com/a/39578803
+    /**
+     * From https://stackoverflow.com/a/39578803
+     * When activity has finished and returnes result
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        // check if the request code is same as what is passed  here it is 2
+        // check if the request code is same as what is passed  here it is 1
         if(requestCode==1)
         {
             Bundle extras = data.getExtras();
             username = extras.getString("Username");
             password = extras.getString("Password");
+            connection.setUser(username,password);
         }
     }
 
+    /**
+     * Get last user info from file.
+     * @return
+     */
     private String[] getLastUser(){
         String result[];
         String text = readFromFile(this.getApplicationContext(), "user.txt");
@@ -81,13 +92,22 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
+    /**
+     * Write current user info to file.
+     */
     private void setLastUser(){
         Context context = this.getApplicationContext();
         String data = username + "," + password;
         writeToFile(data,context, "user.txt");
     }
 
-    // From https://stackoverflow.com/a/14377185
+    /**
+     * From https://stackoverflow.com/a/14377185
+     * Write given data to given filename in given context.
+     * @param data
+     * @param context
+     * @param filename
+     */
     private void writeToFile(String data, Context context, String filename) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
@@ -100,7 +120,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // From https://stackoverflow.com/a/14377185
+    /**
+     * From https://stackoverflow.com/a/14377185
+     * Read from given filename in given context.
+     * @param context
+     * @param filename
+     * @return String
+     */
     private String readFromFile(Context context, String filename) {
 
         String result = "";
@@ -130,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("Main activity Read from file: ", "Can not read file: " + e.toString());
         }
-
         return result;
     }
 

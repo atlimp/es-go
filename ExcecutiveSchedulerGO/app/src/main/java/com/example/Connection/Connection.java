@@ -15,6 +15,7 @@ public class Connection {
     private static Connection instance = new Connection();
     private String URL = "https://apis.is/cars";
     private User user;
+
     private Connection() {
     }
 
@@ -52,6 +53,11 @@ public class Connection {
         return null;
     }
     */
+    public void setUser(String username, String password){
+        user.setUsername(username);
+        user.setPassword(password);
 
+        // TODO: Connect to backend and fill in the rest of the info.
+    }
 
 }
