@@ -10,17 +10,24 @@ import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button mLoginButton;
-    Button mDoneButton;
-    EditText mUsernameField;
-    EditText mPasswordField;
-    String username, password;
+    private Button mLoginButton;
+    private Button mDoneButton;
+    private EditText mUsernameField;
+    private EditText mPasswordField;
+    private String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        setListeners();
+
+    }
+
+    private void login() { }
+
+    private void setListeners(){
         mLoginButton = findViewById(R.id.loginButton);
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     username = mUsernameField.getText().toString();
                     password = mPasswordField.getText().toString();
+                    sendResult();
                     return true;
                 }
                 return false;
@@ -70,29 +78,22 @@ public class LoginActivity extends AppCompatActivity {
 
         // Handle done button press.
         mDoneButton = findViewById(R.id.done);
-
         mDoneButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 username = mUsernameField.getText().toString();
                 password = mPasswordField.getText().toString();
+                sendResult();
             }
         });
     }
 
-    private void login() {
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private void sendResult(){
+        // From https://stackoverflow.com/questions/19666572/how-to-call-a-method-in-another-activity-from-activity
+        Intent intent=new Intent();
+        intent.putExtra("Username", username);
+        intent.putExtra("Password", password);
+        setResult(1,intent);
+        finish(); //finishing activity
     }
 }
