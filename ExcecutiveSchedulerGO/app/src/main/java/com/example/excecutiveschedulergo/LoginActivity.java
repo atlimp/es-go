@@ -3,10 +3,22 @@ package com.example.excecutiveschedulergo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.Connection.Connection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -15,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUsernameField;
     private EditText mPasswordField;
     private String username, password;
+    private final Connection c = Connection.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void login() { }
+    private void login() {}
 
     /**
      * From https://stackoverflow.com/a/39578803
@@ -37,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("Password", password);
         setResult(1,intent);
         finish(); //finishing activity
+    }
+
+    private void setUsername() {
+        mUsernameField.setText(username);
     }
 
     /**
@@ -99,7 +116,37 @@ public class LoginActivity extends AppCompatActivity {
                 username = mUsernameField.getText().toString();
                 // ...Maybe hash before sending.
                 password = mPasswordField.getText().toString();
-                sendResult();
+
+                c.get("?number=hzf64", null, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.e("LoginActivity: donebutton", e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            JSONObject obj = null;
+                            try {
+                                obj = new JSONObject(response.body().string());
+
+                                username = obj.toString();
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setUsername();
+                                    }
+                                });
+                                Log.e("LoginActivity: done button", obj.toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
+                //sendResult();
             }
         });
     }

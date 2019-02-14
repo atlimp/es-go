@@ -13,8 +13,9 @@ import okhttp3.Response;
 public class Connection {
 
     private static Connection instance = new Connection();
-    private String URL = "https://apis.is/cars";
+    private String URL = "https://apis.is/car";
     private User user;
+    private final OkHttpClient client = new OkHttpClient();
 
     private Connection() {
         user = new User();
@@ -32,28 +33,17 @@ public class Connection {
                 .url()
     }
 
-
-    public String get(String endPoint, String data) {
+    */
+    public void get(String endPoint, Callback c) {
         OkHttpClient client = new OkHttpClient();
 
         Request req = new Request.Builder().url(URL + endPoint).build();
 
         Call call = client.newCall(req);
 
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-            }
-        });
-        return null;
+        call.enqueue(c);
     }
-    */
+    
     public void setUser(String username, String password){
         user.setUsername(username);
         user.setPassword(password);
