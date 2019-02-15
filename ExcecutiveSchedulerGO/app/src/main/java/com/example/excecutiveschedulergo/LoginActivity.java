@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.Connection.Connection;
+import com.example.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,7 +118,26 @@ public class LoginActivity extends AppCompatActivity {
                 // ...Maybe hash before sending.
                 password = mPasswordField.getText().toString();
 
-                c.get("?number=hzf64", null, new Callback() {
+                User user = new User();
+
+                user.setUsername(username);
+                user.setPassword(password);
+
+                c.post("/login", user, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.e("Login Activity - Login: ", e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                    }
+                });
+
+                /*
+
+                c.get("?number=hzf64", new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.e("LoginActivity: donebutton", e.getMessage());
@@ -145,6 +165,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+                */
 
                 //sendResult();
             }
