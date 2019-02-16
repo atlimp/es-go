@@ -1,6 +1,7 @@
 package com.example.excecutiveschedulergo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 
 import com.example.Connection.Connection;
 import com.example.model.User;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,6 +57,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setUsername() {
         mUsernameField.setText(username);
+    }
+
+    private void setToken(String s) {
+        Gson gson = new Gson();
+        User user = gson.fromJson(s, User.class);
+        // TODO: Store token persistently, (SharedPreferences?)
     }
 
     /**
@@ -131,7 +139,13 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-
+                        if (response.isSuccessful()) {
+                            String res = response.body().string();
+                            Log.e("Button pressed", res);
+                            setToken(res);
+                        } else {
+                            Log.e("Button pressed", "failed");
+                        }
                     }
                 });
 

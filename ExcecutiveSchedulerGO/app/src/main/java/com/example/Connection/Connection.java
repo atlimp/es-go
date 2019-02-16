@@ -1,5 +1,6 @@
 package com.example.Connection;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.model.User;
@@ -44,6 +45,7 @@ public class Connection {
         Request req = new Request.Builder()
                 .addHeader("Authorization", "token")
                 .post(body)
+                .url(URL + endPoint)
                 .build();
 
         Call call = client.newCall(req);
@@ -65,6 +67,31 @@ public class Connection {
         user.setPassword(password);
 
         // TODO: Connect to backend and fill in the rest of the info.
+    }
+
+    public static void main(String[] args) {
+        Connection c = Connection.getInstance();
+        User user = new User();
+        user.setUsername("atli");
+        user.setPassword("foo");
+
+        c.post("/login", user, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("Connection main: ", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String res = response.body().string();
+                    Log.e("Connection Successful: ", res);
+                } else {
+                    String res = response.body().string();
+                    Log.e("Connection failed: ", res);
+                }
+            }
+        });
     }
 
 }
