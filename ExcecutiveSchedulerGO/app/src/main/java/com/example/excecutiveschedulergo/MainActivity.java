@@ -2,11 +2,13 @@ package com.example.excecutiveschedulergo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.Connection.Connection;
 
@@ -20,9 +22,14 @@ import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button mButton;
-    Connection connection;
+    private Button mButton;
+    private TextView mHello;
+
+    private final Connection connection = Connection.getInstance();
     String username, password;
+
+    private final String PREF_NAME = "TOKEN";
+    private final int MODE_PRIVATE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +57,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        connection = Connection.getInstance();
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        if (token != null) {
+            mHello = findViewById(R.id.hello);
+            mHello.setText(token);
+        }
     }
 
     @Override

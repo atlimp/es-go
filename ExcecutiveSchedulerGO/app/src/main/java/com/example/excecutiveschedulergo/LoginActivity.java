@@ -32,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     private String username, password;
     private final Connection c = Connection.getInstance();
 
+    private final String PREF_NAME = "TOKEN";
+    private final int MODE_PRIVATE = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,11 @@ public class LoginActivity extends AppCompatActivity {
         Gson gson = new Gson();
         User user = gson.fromJson(s, User.class);
         // TODO: Store token persistently, (SharedPreferences?)
+
+
+        SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+        editor.putString("token", user.getToken());
+        editor.apply();
     }
 
     /**
