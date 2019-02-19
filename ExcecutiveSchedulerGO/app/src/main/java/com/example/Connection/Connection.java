@@ -3,6 +3,7 @@ package com.example.Connection;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.excecutiveschedulergo.TokenStore;
 import com.example.model.User;
 import com.google.gson.Gson;
 
@@ -22,15 +23,10 @@ public class Connection {
     private static Connection instance = new Connection();
 
     private final String URL = "https://executive-scheduler.herokuapp.com";
-    private final Gson gson = new Gson();
     private final MediaType JSON = MediaType.parse("application/json");
-    private final OkHttpClient client = new OkHttpClient();
-
-    private User user;
-
 
     private Connection() {
-        user = new User();
+
     }
 
     public static Connection getInstance() {
@@ -39,6 +35,9 @@ public class Connection {
 
 
     public void post(String endPoint, Object obj, Callback c) {
+        OkHttpClient client = new OkHttpClient();
+
+        Gson gson = new Gson();
         String json = gson.toJson(obj);
         RequestBody body = RequestBody.create(JSON, json);
 
@@ -55,19 +54,50 @@ public class Connection {
 
 
     public void get(String endPoint, Callback c) {
-        Request req = new Request.Builder().url(URL + endPoint).build();
+        OkHttpClient client = new OkHttpClient();
+
+        Request req = new Request.Builder()
+                .url(URL + endPoint)
+                .build();
 
         Call call = client.newCall(req);
 
         call.enqueue(c);
     }
-    
-    public void setUser(String username, String password){
-        user.setUsername(username);
-        user.setPassword(password);
 
-        // TODO: Connect to backend and fill in the rest of the info.
+    public void post(String endPoint, Object obj, String token, Callback c) {
+        OkHttpClient client = new OkHttpClient();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(obj);
+        RequestBody body = RequestBody.create(JSON, json);
+
+        Request req = new Request.Builder()
+                .addHeader("Authorization", "token")
+                .post(body)
+                .url(URL + endPoint)
+                .addHeader("Authorization", "Bearer " + token)
+                .build();
+
+        Call call = client.newCall(req);
+
+        call.enqueue(c);
     }
+
+
+    public void get(String endPoint, String token, Callback c) {
+        OkHttpClient client = new OkHttpClient();
+
+        Request req = new Request.Builder()
+                .url(URL + endPoint)
+                .addHeader("Authorization", "Bearer " + token)
+                .build();
+
+        Call call = client.newCall(req);
+
+        call.enqueue(c);
+    }
+
 
     public static void main(String[] args) {
         Connection c = Connection.getInstance();

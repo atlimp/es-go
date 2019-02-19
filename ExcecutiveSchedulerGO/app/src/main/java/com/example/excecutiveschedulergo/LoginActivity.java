@@ -30,10 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUsernameField;
     private EditText mPasswordField;
     private String username, password;
+
     private final Connection c = Connection.getInstance();
 
-    private final String PREF_NAME = "TOKEN";
-    private final int MODE_PRIVATE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,39 +43,58 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void login() {}
+    private void login() {
+        username = mUsernameField.getText().toString();
+        // ...Maybe hash before sending.
+        password = mPasswordField.getText().toString();
+
+        User user = new User();
+
+        user.setUsername(username);
+        user.setPassword(password);
+
+        c.post("/login", user, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("Login Activity - Login: ", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String res = response.body().string();
+                    Log.e("Button pressed", res);
+                    setToken(res);
+                } else {
+                    Log.e("Button pressed", "failed");
+                }
+            }
+        });
+    }
 
     /**
      * From https://stackoverflow.com/a/39578803
      * Sends activity result back to mainActivity.
      */
     private void sendResult(){
+        login();
         Intent intent=new Intent();
-        intent.putExtra("Username", username);
-        intent.putExtra("Password", password);
-        setResult(1,intent);
+        setResult(0,intent);
         finish(); //finishing activity
-    }
-
-    private void setUsername() {
-        mUsernameField.setText(username);
     }
 
     private void setToken(String s) {
         Gson gson = new Gson();
         User user = gson.fromJson(s, User.class);
-        // TODO: Store token persistently, (SharedPreferences?)
-
-
-        SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
-        editor.putString("token", user.getToken());
-        editor.apply();
+        TokenStore.setToken(user.getToken(), this.getApplicationContext());
     }
 
     /**
      * Set all listeners
      */
     private void setListeners(){
+
+        // Change name of the button
         mLoginButton = findViewById(R.id.loginButton);
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +134,6 @@ public class LoginActivity extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    username = mUsernameField.getText().toString();
-                    password = mPasswordField.getText().toString();
                     sendResult();
                     return true;
                 }
@@ -130,67 +146,7 @@ public class LoginActivity extends AppCompatActivity {
         mDoneButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                username = mUsernameField.getText().toString();
-                // ...Maybe hash before sending.
-                password = mPasswordField.getText().toString();
-
-                User user = new User();
-
-                user.setUsername(username);
-                user.setPassword(password);
-
-                c.post("/login", user, new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.e("Login Activity - Login: ", e.getMessage());
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (response.isSuccessful()) {
-                            String res = response.body().string();
-                            Log.e("Button pressed", res);
-                            setToken(res);
-                        } else {
-                            Log.e("Button pressed", "failed");
-                        }
-                    }
-                });
-
-                /*
-
-                c.get("?number=hzf64", new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.e("LoginActivity: donebutton", e.getMessage());
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (response.isSuccessful()) {
-                            JSONObject obj = null;
-                            try {
-                                obj = new JSONObject(response.body().string());
-
-                                username = obj.toString();
-
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        setUsername();
-                                    }
-                                });
-                                Log.e("LoginActivity: done button", obj.toString());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                });
-
-                */
-
-                //sendResult();
+                sendResult();
             }
         });
     }
