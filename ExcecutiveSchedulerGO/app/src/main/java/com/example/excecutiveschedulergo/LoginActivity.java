@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.Connection.Connection;
 import com.example.model.User;
@@ -64,9 +65,21 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String res = response.body().string();
                     Log.e("Button pressed", res);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(LoginActivity.this, R.string.loginSuccess, Toast.LENGTH_LONG).show();
+                        }
+                    });
                     setToken(res);
                 } else {
                     Log.e("Button pressed", "failed");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(LoginActivity.this, R.string.loginFail, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
         });

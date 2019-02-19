@@ -8,12 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.Connection.Connection;
-import com.example.model.User;
-import com.google.gson.Gson;
-
 import java.io.IOException;
-import java.util.List;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -21,12 +16,9 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     private Button mButton;
-    private TextView mHello;
     private Button mUsersButton;
 
     private final Connection connection = Connection.getInstance();
-
-    String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
