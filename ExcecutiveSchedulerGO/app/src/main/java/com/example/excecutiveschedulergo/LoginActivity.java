@@ -49,34 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void login() {
-        username = mUsernameField.getText().toString();
-        // ...Maybe hash before sending.
-        password = mPasswordField.getText().toString();
-
-        User user = new User();
-
-        user.setUsername(username);
-        user.setPassword(password);
-
-        // If create new has been pressed,
-        // the user is registered and then logged in.
-        if(createNew) {
-            name = mName.getText().toString();
-            user.setName(name);
-            c.post("/register", user, new Callback(){
-                @Override
-                public void onFailure(Call call, IOException e){
-                    Log.e("Login Activity - Login(create): ", e.getMessage());
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    if(response.isSuccessful())
-                        Log.e("Login Activity - Login(create): ", response.body().string());
-                }
-            });
-        }
+    private void login(User user) {
 
         c.post("/login", user, new Callback() {
             @Override
@@ -110,11 +83,46 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
+     * If create new has been pressed, this is called before
+     * logging in, so the user exists when we login.
+     * @param user {username,name,password}
+     */
+    private void create(User user){
+        name = mName.getText().toString();
+        user.setName(name);
+        c.post("/register", user, new Callback(){
+            @Override
+            public void onFailure(Call call, IOException e){
+                Log.e("Login Activity - Login(create): ", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if(response.isSuccessful()) {
+                    Log.e("Login Activity - Login(create): ", response.body().string());
+                    login(user);
+                }
+            }
+        });
+    }
+
+    /**
      * From https://stackoverflow.com/a/39578803
      * Sends activity result back to mainActivity.
      */
     private void sendResult(){
-        login();
+
+        User user = new User();
+
+        username = mUsernameField.getText().toString();
+        // ...Maybe hash before sending.
+        password = mPasswordField.getText().toString();
+
+        user.setUsername(username);
+        user.setPassword(password);
+
+        if(createNew) create(user);
+        else login(user);
         Intent intent=new Intent();
         setResult(0,intent);
         finish(); //finishing activity
@@ -193,9 +201,14 @@ public class LoginActivity extends AppCompatActivity {
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mName.setVisibility(View.VISIBLE);
-                mName.setText("");
-                createNew = true;
+                if(!createNew) {
+                    mName.setVisibility(View.VISIBLE);
+                    mName.setText("");
+                    createNew = true;
+                } else {
+                    mName.setVisibility(View.GONE);
+                    createNew = false;
+                }
             }
         });
     }
