@@ -202,10 +202,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!createNew) {
+                    mCreate.setText("Name");
                     mName.setVisibility(View.VISIBLE);
                     mName.setText("");
                     createNew = true;
                 } else {
+                    mCreate.setText("Click to create new User");
                     mName.setVisibility(View.GONE);
                     createNew = false;
                 }

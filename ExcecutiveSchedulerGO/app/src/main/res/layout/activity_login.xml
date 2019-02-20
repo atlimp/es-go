@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:textColor="@color/darkRed"
+                android:layout_marginHorizontal="20dp"
                 android:text="Click to create new User"/>
 
             <EditText
