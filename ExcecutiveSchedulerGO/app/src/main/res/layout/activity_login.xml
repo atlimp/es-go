@@ -50,6 +50,7 @@
                     android:layout_marginHorizontal="@dimen/textboxMargin"
                     android:paddingHorizontal="@dimen/textboxPadding"
                     android:background="@drawable/back"
+                    android:inputType="textPersonName"
                     android:text="@string/username"/>
 
 
@@ -59,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/textboxPadding"
                     android:background="@drawable/back"
+                    android:inputType="textPassword"
                     android:text="@string/password"/>
 
 
@@ -87,6 +89,7 @@
                 android:layout_marginHorizontal="@dimen/textboxMargin"
                 android:paddingHorizontal="@dimen/textboxPadding"
                 android:background="@drawable/back"
+                android:inputType="textPersonName"
                 android:text="name"/>
 
         </LinearLayout>
