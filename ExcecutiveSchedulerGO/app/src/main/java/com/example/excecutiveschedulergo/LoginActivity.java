@@ -213,5 +213,17 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Handle Enter key pressed inside name field.
+        mName.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    sendResult();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }

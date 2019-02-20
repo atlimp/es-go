@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textbox">150dp</dimen>
+    <dimen name="textboxMargin">12dp</dimen>
+    <dimen name="textboxPadding">10dp</dimen>
+</resources>
