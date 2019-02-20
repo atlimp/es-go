@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Connection.Connection;
@@ -30,7 +31,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button mDoneButton;
     private EditText mUsernameField;
     private EditText mPasswordField;
-    private String username, password;
+    private TextView mCreate;
+    private EditText mName;
+    private boolean createNew;
+    private String username, password, name;
 
     private final Connection c = Connection.getInstance();
 
@@ -40,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        createNew = false;
         setListeners();
 
     }
@@ -53,6 +58,25 @@ public class LoginActivity extends AppCompatActivity {
 
         user.setUsername(username);
         user.setPassword(password);
+
+        // If create new has been pressed,
+        // the user is registered and then logged in.
+        if(createNew) {
+            name = mName.getText().toString();
+            user.setName(name);
+            c.post("/register", user, new Callback(){
+                @Override
+                public void onFailure(Call call, IOException e){
+                    Log.e("Login Activity - Login(create): ", e.getMessage());
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if(response.isSuccessful())
+                        Log.e("Login Activity - Login(create): ", response.body().string());
+                }
+            });
+        }
 
         c.post("/login", user, new Callback() {
             @Override
@@ -160,6 +184,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 sendResult();
+            }
+        });
+
+
+        mCreate = findViewById(R.id.create);
+        mName = findViewById(R.id.name);
+        mCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mName.setVisibility(View.VISIBLE);
+                mName.setText("");
+                createNew = true;
             }
         });
     }

@@ -3,6 +3,11 @@ package com.example.excecutiveschedulergo;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ * From https://stackoverflow.com/a/9193028
+ * Has been heavily modified.
+ */
+
 public class TokenStore {
 
     private static final String PREF_NAME = "TOKEN";

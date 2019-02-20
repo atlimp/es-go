@@ -3,6 +3,7 @@
 /local.properties
 /.idea/
 /ExcecutiveSchedulerGO/.idea/
+/ExcecutiveSchedulerGO/.idea/*
 .DS_Store
 /build
 /captures
