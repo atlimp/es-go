@@ -6,4 +6,5 @@
     <string name="usersButton">Users</string>
     <string name="loginSuccess">Login Successful</string>
     <string name="loginFail">Login Failed</string>
+    <string name="registerFail">Failed to register</string>
 </resources>

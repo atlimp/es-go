@@ -49,32 +49,59 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void finishLogin() {
+        Intent intent = new Intent();
+        setResult(0,intent);
+        finish(); //finishing activity
+    }
+
+    private void loginFailed() {
+        Log.e("Login Activity - Login: ", "Login failed");
+        Toast.makeText(LoginActivity.this, R.string.loginFail, Toast.LENGTH_LONG).show();
+    }
+
+    private void registerFailed() {
+        Log.e("Login Activity - Login: ", "Register failed");
+        Toast.makeText(LoginActivity.this, R.string.registerFail, Toast.LENGTH_LONG).show();
+    }
+
+    private void loginSuccessful() {
+        Log.e("Button pressed", "Login successful");
+        Toast.makeText(LoginActivity.this, R.string.loginSuccess, Toast.LENGTH_LONG).show();
+    }
+
     private void login(User user) {
 
         c.post("/login", user, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.e("Login Activity - Login: ", e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loginFailed();
+                    }
+                });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String res = response.body().string();
-                    Log.e("Button pressed", res);
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(LoginActivity.this, R.string.loginSuccess, Toast.LENGTH_LONG).show();
+                            loginSuccessful();
                         }
                     });
+
                     setToken(res);
+                    finishLogin();
                 } else {
-                    Log.e("Button pressed", "failed");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(LoginActivity.this, R.string.loginFail, Toast.LENGTH_LONG).show();
+                            loginFailed();
                         }
                     });
                 }
@@ -94,6 +121,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e){
                 Log.e("Login Activity - Login(create): ", e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        registerFailed();
+                    }
+                });
             }
 
             @Override
@@ -101,6 +134,13 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     Log.e("Login Activity - Login(create): ", response.body().string());
                     login(user);
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            registerFailed();
+                        }
+                    });
                 }
             }
         });
@@ -123,9 +163,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if(createNew) create(user);
         else login(user);
-        Intent intent=new Intent();
-        setResult(0,intent);
-        finish(); //finishing activity
     }
 
     private void setToken(String s) {
