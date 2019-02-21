@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(User user) {
 
-        c.post("/login", user, new Callback() {
+        c.loginUser(user, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     private void create(User user){
         name = mName.getText().toString();
         user.setName(name);
-        c.post("/register", user, new Callback(){
+        c.registerUser(user, new Callback(){
             @Override
             public void onFailure(Call call, IOException e){
                 Log.e("Login Activity - Login(create): ", e.getMessage());
