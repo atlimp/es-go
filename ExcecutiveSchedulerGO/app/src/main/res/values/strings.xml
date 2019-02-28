@@ -7,4 +7,10 @@
     <string name="loginSuccess">Login Successful</string>
     <string name="loginFail">Login Failed</string>
     <string name="registerFail">Failed to register</string>
+    <string name="title_activity_create_event">CreateEventActivity</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="startDate">Start Date</string>
+    <string name="endDate">End Date</string>
+    <string name="create">Create</string>
 </resources>

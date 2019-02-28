@@ -7,6 +7,10 @@ import com.example.excecutiveschedulergo.TokenStore;
 import com.example.model.Event;
 import com.example.model.User;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import java.io.IOException;
 import java.util.Date;
@@ -63,9 +67,12 @@ public class Connection {
     private void post(String endPoint, Object obj, String token, Callback c) {
         OkHttpClient client = new OkHttpClient();
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Date.class, (JsonSerializer<Date>) (date, type, jsonSerializationContext) -> new JsonPrimitive(date.getTime()))
+                .create();
         String json = gson.toJson(obj);
         RequestBody body = RequestBody.create(JSON, json);
+
 
         Request req = new Request.Builder()
                 .post(body)
