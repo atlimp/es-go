@@ -14,6 +14,13 @@
         android:gravity="center"
         android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/upper_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <!--<LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,16 +32,87 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create"/>
-            <EditText
-                android:id="@+id/create_title"
-                android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/textbox"
                 android:layout_height="wrap_content"
-                android:text="@string/title" />
-            <EditText
-                android:id="@+id/create_description"
-                android:layout_width="wrap_content"
+                android:text="Title"/>
+
+            <TextView
+                android:layout_width="@dimen/textbox"
                 android:layout_height="wrap_content"
-                android:text="@string/description"/>
+                android:text="Description"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/create_title"
+            android:layout_width="@dimen/textbox"
+            android:layout_height="wrap_content"
+            android:text="@string/title" />
+
+        <EditText
+            android:id="@+id/create_description"
+            android:layout_width="@dimen/textbox"
+            android:layout_height="wrap_content"
+            android:text="@string/description"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lower_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="@dimen/textbox"
+                android:layout_height="wrap_content"
+                android:text="Start date"/>
+
+            <TextView
+                android:layout_width="@dimen/textbox"
+                android:layout_height="wrap_content"
+                android:text="End date"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/startDateTextBox"
+                android:layout_width="@dimen/textbox"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/endDateTextBox"
+                android:layout_width="@dimen/textbox"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 <!--
         </LinearLayout>
 
@@ -48,12 +126,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/startDate"
-                android:datePickerMode="spinner" />
-            <DatePicker
-                android:id="@+id/create_endDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/endDate"/>
+                android:datePickerMode="spinner"
+                android:visibility="gone"/>
+
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"></TimePicker>
+
+        <Button
+            android:id="@+id/set_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="set date"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/set_time_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="set time"
+            android:visibility="gone"/>
+
+
+        <DatePicker
+            android:id="@+id/create_endDate"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/endDate"
+            android:visibility="gone"/>
 
 <!--
         </LinearLayout>
