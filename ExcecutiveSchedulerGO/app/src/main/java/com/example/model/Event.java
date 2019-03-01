@@ -33,16 +33,16 @@ public class Event {
         this.id = id;
     }
 
-    public Long getStartDate() {
-        return startDate.getTime();
+    public Date getStartDate() {
+        return startDate;
     }
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Long getEndDate() {
-        return endDate.getTime();
+    public Date getEndDate() {
+        return endDate;
     }
 
     public void setEndDate(Date endDate) {
