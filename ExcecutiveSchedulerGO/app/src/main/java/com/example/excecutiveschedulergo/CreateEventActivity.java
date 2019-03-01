@@ -82,13 +82,23 @@ public class CreateEventActivity extends AppCompatActivity {
                 month = _month;
                 day = _day;
                 calendar.set(year,month,day);
-                Log.e("CreateEventActivity.onDateChanged: ", pickStart.toString());
+                Log.v("CreateEventActivity.onDateChanged: ", pickStart.toString());
                 if(pickStart){
                     mStartDateText.setText(calendar.getTime().toString());
-                    pickedStart = calendar.get(Calendar.MILLISECOND);
+                    pickedStart = calendar.getTimeInMillis();
+                    // Always keep end of event at least equal to start
+                    if(pickedEnd < pickedStart) {
+                        pickedEnd = pickedStart;
+                        mEndDateText.setText(calendar.getTime().toString());
+                    }
                 } else{
                     mEndDateText.setText(calendar.getTime().toString());
-                    pickedEnd = calendar.get(Calendar.MILLISECOND);
+                    pickedEnd = calendar.getTimeInMillis();
+                    // Always keep end of event at least equal to start
+                    if(pickedEnd < pickedStart) {
+                        pickedStart = pickedEnd;
+                        mStartDateText.setText(calendar.getTime().toString());
+                    }
                 }
             }
         });
@@ -163,7 +173,7 @@ public class CreateEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pickStart = false;
-                Log.e("CreateEventActivity.mEndDateText.onClick: ", pickStart.toString());
+                Log.v("CreateEventActivity.mEndDateText.onClick: ", pickStart.toString());
                 mStartDate.setVisibility(View.VISIBLE);
                 mSetDateButton.setVisibility(View.VISIBLE);
                 //mEndDate.setMinDate(pickedStart);
@@ -212,7 +222,7 @@ public class CreateEventActivity extends AppCompatActivity {
                 String json = response.body().string();
 
                 if (response.isSuccessful()) {
-                    Log.e("Create event", json);
+                    Log.v("Create event", json);
                 } else {
                     Log.e("Create event", json);
                 }
