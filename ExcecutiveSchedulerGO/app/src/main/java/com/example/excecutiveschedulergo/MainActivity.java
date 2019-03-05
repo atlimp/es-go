@@ -15,8 +15,9 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mButton;
-    private Button mUsersButton;
+    private Button mLoginButton;
+    private Button mCalendarButton;
+    private Button mCreateEventButton;
 
     private final Connection c = Connection.getInstance();
 
@@ -25,20 +26,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent create = new Intent(getApplicationContext(), CreateEventActivity.class);
-        startActivity(create);
+        mLoginButton = findViewById(R.id.login_button);
+        mCalendarButton = findViewById(R.id.calendar_button);
+        mCreateEventButton = findViewById(R.id.create_event_button);
 
-        mButton = findViewById(R.id.button);
-
-        mButton.setOnClickListener(new View.OnClickListener() {
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivityForResult(login,1);
+                startActivity(login);
             }
         });
 
-        mUsersButton = findViewById(R.id.usersButton);
+        mCalendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                startActivity(calendar);
+            }
+        });
+
+        mCreateEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createEvent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                startActivity(createEvent);
+            }
+        });
     }
 
     @Override

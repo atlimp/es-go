@@ -1,7 +1,9 @@
 package com.example.model;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Event {
 
@@ -71,5 +73,17 @@ public class Event {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    /**
+     * This is for the ListView widget in the calendar activity
+     * @return
+     */
+    public String toString() {
+        Locale loc = new Locale("is", "IS");
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, loc);
+
+        return this.title + "\n" +
+                dateFormat.format(this.startDate) + " - " + dateFormat.format(this.endDate);
     }
 }
