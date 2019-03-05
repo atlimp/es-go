@@ -18,6 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.security.auth.Destroyable;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -50,6 +52,11 @@ public class CreateEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+        setListeners();
+    }
+
+
+    private void setListeners() {
 
         mUpperInfo = findViewById(R.id.upper_info);
         mTitle = findViewById(R.id.create_title);
@@ -71,31 +78,49 @@ public class CreateEventActivity extends AppCompatActivity {
         mEndDateText.setText(calendar.getTime().toString());
 
         pickedStart = calendar.getTimeInMillis();
-        pickedEnd   = calendar.getTimeInMillis();
+        pickedEnd = calendar.getTimeInMillis();
+
+        mTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus && mTitle.getText().toString().equals("Title")) {
+                    mTitle.setText("");
+                }
+            }
+        });
+
+        mDescription.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus && mDescription.getText().toString().equals("Description")) {
+                    mDescription.setText("");
+                }
+            }
+        });
 
         // From https://stackoverflow.com/a/34952495
         // Update variables with user input.
-        mStartDate.init(year, month, day, new DatePicker.OnDateChangedListener(){
+        mStartDate.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
-            public void onDateChanged(DatePicker mStartDate, int _year, int _month, int _day){
+            public void onDateChanged(DatePicker mStartDate, int _year, int _month, int _day) {
                 year = _year;
                 month = _month;
                 day = _day;
-                calendar.set(year,month,day);
+                calendar.set(year, month, day);
                 Log.v("CreateEventActivity.onDateChanged: ", pickStart.toString());
-                if(pickStart){
+                if (pickStart) {
                     mStartDateText.setText(calendar.getTime().toString());
                     pickedStart = calendar.getTimeInMillis();
                     // Always keep end of event at least equal to start
-                    if(pickedEnd < pickedStart) {
+                    if (pickedEnd < pickedStart) {
                         pickedEnd = pickedStart;
                         mEndDateText.setText(calendar.getTime().toString());
                     }
-                } else{
+                } else {
                     mEndDateText.setText(calendar.getTime().toString());
                     pickedEnd = calendar.getTimeInMillis();
                     // Always keep end of event at least equal to start
-                    if(pickedEnd < pickedStart) {
+                    if (pickedEnd < pickedStart) {
                         pickedStart = pickedEnd;
                         mStartDateText.setText(calendar.getTime().toString());
                     }
@@ -110,22 +135,21 @@ public class CreateEventActivity extends AppCompatActivity {
             public void onTimeChanged(TimePicker view, int _hour, int _minute) {
                 hour = _hour;
                 minute = _minute;
-                calendar.set(year,month,day,hour,minute);
-                if(pickStart) {
+                calendar.set(year, month, day, hour, minute);
+                if (pickStart) {
                     mStartDateText.setText(calendar.getTime().toString());
                     pickedStart = calendar.getTimeInMillis();
-                }
-                else {
+                } else {
                     mEndDateText.setText(calendar.getTime().toString());
-                    pickedEnd   = calendar.getTimeInMillis();
+                    pickedEnd = calendar.getTimeInMillis();
                 }
             }
         });
 
         mSetDateButton = findViewById(R.id.set_date_button);
-        mSetDateButton.setOnClickListener(new View.OnClickListener(){
+        mSetDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 mStartDate.setVisibility(View.GONE);
                 mSetDateButton.setVisibility(View.GONE);
                 mTimePicker.setVisibility(View.VISIBLE);
@@ -134,13 +158,13 @@ public class CreateEventActivity extends AppCompatActivity {
         });
 
         mSetTimeButton = findViewById(R.id.set_time_button);
-        mSetTimeButton.setOnClickListener(new View.OnClickListener(){
+        mSetTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 mTimePicker.setVisibility(View.GONE);
                 mSetTimeButton.setVisibility(View.GONE);
-                if(pickStart) pickedStart   = calendar.getTimeInMillis();
-                else pickedEnd              = calendar.getTimeInMillis();
+                if (pickStart) pickedStart = calendar.getTimeInMillis();
+                else pickedEnd = calendar.getTimeInMillis();
 
                 mUpperInfo.setVisibility(View.VISIBLE);
             }
@@ -187,17 +211,17 @@ public class CreateEventActivity extends AppCompatActivity {
         String description = mDescription.getText().toString();
 
         /**
-        Calendar start = new GregorianCalendar(
-                mStartDate.getYear(),
-                mStartDate.getMonth(),
-                mStartDate.getDayOfMonth()
-        );
+         Calendar start = new GregorianCalendar(
+         mStartDate.getYear(),
+         mStartDate.getMonth(),
+         mStartDate.getDayOfMonth()
+         );
 
-        Calendar end = new GregorianCalendar(
-                mEndDate.getYear(),
-                mEndDate.getMonth(),
-                mEndDate.getDayOfMonth()
-        );
+         Calendar end = new GregorianCalendar(
+         mEndDate.getYear(),
+         mEndDate.getMonth(),
+         mEndDate.getDayOfMonth()
+         );
          */
         Date startDate = new Date(pickedStart);
         Date endDate = new Date(pickedEnd);
@@ -211,6 +235,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
 
         String token = TokenStore.getToken(this.getApplicationContext());
+        Log.e("Token: ", token);
         c.createEvent(event, token, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
