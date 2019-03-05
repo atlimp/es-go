@@ -67,6 +67,9 @@ public class Connection {
     private void post(String endPoint, Object obj, String token, Callback c) {
         OkHttpClient client = new OkHttpClient();
 
+        /**
+         * https://stackoverflow.com/a/41979087
+         */
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Date.class, (JsonSerializer<Date>) (date, type, jsonSerializationContext) -> new JsonPrimitive(date.getTime()))
                 .create();
