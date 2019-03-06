@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent createEvent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("Type", 0);
+                createEvent.putExtras(bundle);
                 startActivity(createEvent);
             }
         });
