@@ -16,9 +16,6 @@ import com.example.model.Event;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-
-import javax.security.auth.Destroyable;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -58,7 +55,7 @@ public class CreateEventActivity extends AppCompatActivity {
         setListeners();
 
         Bundle bundle = getIntent().getExtras();
-        setLayout(bundle);
+        setPurpose(bundle);
     }
 
 
@@ -267,7 +264,7 @@ public class CreateEventActivity extends AppCompatActivity {
      * From https://stackoverflow.com/a/3913720
      * @param bundle
      */
-    private void setLayout(Bundle bundle){
+    private void setPurpose(Bundle bundle){
         int num = -1;
         if(bundle != null){
             num = bundle.getInt("Type");
