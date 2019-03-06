@@ -3,6 +3,8 @@ package com.example.excecutiveschedulergo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -25,6 +27,7 @@ import okhttp3.Response;
 public class CalendarActivity extends AppCompatActivity {
 
     ListView mList;
+    Toolbar  toolbar;
     Connection c = Connection.getInstance();
 
     @Override
@@ -33,6 +36,7 @@ public class CalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calendar);
 
         mList = findViewById(R.id.list);
+        toolbar = new Toolbar(this);
 
         Date startDate = new Date(0);
         Date endDate = new Date();
@@ -71,6 +75,15 @@ public class CalendarActivity extends AppCompatActivity {
                 } else {
                     Log.e("Get events", json);
                 }
+            }
+        });
+    }
+
+    private void setListeners(){
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                toolbar.event = (Event) parent.getItemAtPosition(position);
             }
         });
     }

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".CalendarActivity">
 
+    <include layout="@layout/toolbar"/>
+
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"

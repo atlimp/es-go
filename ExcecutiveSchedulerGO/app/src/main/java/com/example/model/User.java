@@ -1,8 +1,12 @@
 package com.example.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Parcelable {
 
     private Long id;
     private String name;
@@ -11,7 +15,7 @@ public class User {
     private String token;
     private List<Event> events;
 
-    public User() {
+    public User()  {
 
     }
 
@@ -67,4 +71,36 @@ public class User {
     public void setEvents(List<Event> events) {
         this.events = events;
     }
+
+    /**
+     * Parcelable stuff
+     * @return int for identification if necessary.
+     */
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags){
+        out.writeLong(id);
+        out.writeString(name);
+        out.writeString(username);
+        out.writeString(password);
+        out.writeString(token);
+        out.writeList(events);
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>(){
+
+        public User createFromParcel(Parcel in){
+            ArrayList<Event> inEvents = new ArrayList<Event>();
+            in.readList(inEvents, Event.class.getClassLoader());
+            return new User(in.readString(),in.readString(),in.readString(),in.readString());
+        }
+
+        public User[] newArray(int size){
+            return new User[size];
+        }
+    };
 }

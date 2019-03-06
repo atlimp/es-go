@@ -38,6 +38,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private Button mSetTimeButton;
     private DatePicker mEndDate;
     private LinearLayout mUpperInfo;
+    private Toolbar toolbar;
 
     private Boolean pickStart;
 
@@ -52,7 +53,12 @@ public class CreateEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+        toolbar = new Toolbar(this);
         setListeners();
+
+        Bundle bundle = getIntent().getExtras();
+        setLayout(bundle);
     }
 
 
@@ -253,6 +259,38 @@ public class CreateEventActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     * Sets Activity layout according to int passed when the activity
+     * was created. The int is passed with bundle.
+     * From https://stackoverflow.com/a/3913720
+     * @param bundle
+     */
+    private void setLayout(Bundle bundle){
+        int num = -1;
+        if(bundle != null){
+            num = bundle.getInt("Type");
+        }
+        switch(num){
+
+            case 0:
+                //do something
+                break;
+
+            case 1:
+                //do something
+                break;
+
+            case 2:
+                //do something
+                break;
+
+            case -1:
+                finish();
+                break;
+        }
+
     }
 
 }

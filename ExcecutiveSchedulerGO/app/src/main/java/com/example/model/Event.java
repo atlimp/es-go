@@ -1,11 +1,15 @@
 package com.example.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class Event {
+public class Event implements Parcelable {
 
     private Long id;
     private Date startDate;
@@ -86,4 +90,42 @@ public class Event {
         return this.title + "\n" +
                 dateFormat.format(this.startDate) + " - " + dateFormat.format(this.endDate);
     }
+
+    /**
+     * Parcelable stuff.
+     * @return int for identification if necessary
+     */
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out,  int flags){
+        out.writeLong(id);
+        out.writeLong(startDate.getTime());
+        out.writeLong(endDate.getTime());
+        out.writeString(title);
+        out.writeString(description);
+        out.writeList(users);
+    }
+
+    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>(){
+
+      public Event createFromParcel(Parcel in){
+          long inId = in.readLong();
+          Date inStartDate   = new Date(in.readLong());
+          Date inEndDate     = new Date(in.readLong());
+          String inTitle     = in.readString();
+          String inDescription = in.readString();
+          ArrayList<User> inUsers = new ArrayList<User>();
+          in.readList(inUsers, User.class.getClassLoader());
+
+          return new Event(inId,inStartDate,inEndDate,inTitle,inDescription,inUsers);
+      }
+
+      public Event[] newArray(int size){
+          return new Event[size];
+      }
+    };
 }
