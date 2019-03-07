@@ -34,9 +34,10 @@ public class Toolbar {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(activity.getApplicationContext(), CreateEventActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("Type", 0);
-                intent.putExtras(bundle);
+                intent.putExtra("Type", 0);
+                //Bundle bundle = new Bundle();
+                //bundle.putInt("Type", 0);
+                //intent.putExtras(bundle);
                 activity.startActivity(intent);
                 activity.finish();
             }
@@ -46,10 +47,12 @@ public class Toolbar {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(activity.getApplicationContext(), CreateEventActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("Type", 1);
-                bundle.putParcelable("Event", event);
-                intent.putExtras(bundle);
+                intent.putExtra("Event", event);
+                intent.putExtra("Type", 1);
+                // Bundle bundle = new Bundle();
+                //bundle.putInt("Type", 1);
+                //bundle.putParcelable("Event", event);
+                //intent.putExtras(bundle);
                 activity.startActivity(intent);
                 activity.finish();
             }
@@ -59,10 +62,14 @@ public class Toolbar {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(activity.getApplicationContext(), CreateEventActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("Type", 2);
-                bundle.putParcelable("Event", event);
-                intent.putExtras(bundle);
+                intent.putExtra("Event", event);
+
+                intent.putExtra("Type", 2);
+
+                //Bundle bundle = new Bundle();
+                //bundle.putInt("Type", 2);
+                //bundle.putParcelable("Event", event);
+                //intent.putExtras(bundle);
                 activity.startActivity(intent);
                 activity.finish();
             }

@@ -118,7 +118,7 @@ public class Event implements Parcelable {
           Date inEndDate     = new Date(in.readLong());
           String inTitle     = in.readString();
           String inDescription = in.readString();
-          ArrayList<User> inUsers = new ArrayList<User>();
+          ArrayList<User> inUsers = new ArrayList<>();
           in.readList(inUsers, User.class.getClassLoader());
 
           return new Event(inId,inStartDate,inEndDate,inTitle,inDescription,inUsers);

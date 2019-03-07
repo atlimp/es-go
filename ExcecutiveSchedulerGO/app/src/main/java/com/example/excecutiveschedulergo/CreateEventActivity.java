@@ -1,5 +1,6 @@
 package com.example.excecutiveschedulergo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +17,8 @@ import com.example.model.Event;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Set;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,6 +46,9 @@ public class CreateEventActivity extends AppCompatActivity {
     private long pickedEnd;
 
     private int year, month, day, hour, minute;
+    private int purpose;
+
+    private Event event;
 
     private final Connection c = Connection.getInstance();
 
@@ -53,11 +59,8 @@ public class CreateEventActivity extends AppCompatActivity {
 
         toolbar = new Toolbar(this);
         setListeners();
-
-        Bundle bundle = getIntent().getExtras();
-        setPurpose(bundle);
+        setPurpose(getIntent());
     }
-
 
     private void setListeners() {
 
@@ -181,6 +184,19 @@ public class CreateEventActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switch(purpose){
+                    case 0:
+                        createEvent();
+                        break;
+                    case 1:
+                        editEvent(event);
+                        break;
+                    case 2:
+                        shareEvent(event);
+                        break;
+
+                }
+
                 createEvent();
             }
         });
@@ -258,36 +274,52 @@ public class CreateEventActivity extends AppCompatActivity {
         });
     }
 
+    private void editEvent(Event event){
+
+
+    }
+
+    private void shareEvent(Event event){
+
+    }
+
     /**
      * Sets Activity layout according to int passed when the activity
      * was created. The int is passed with bundle.
      * From https://stackoverflow.com/a/3913720
-     * @param bundle
+     * @param intent
      */
-    private void setPurpose(Bundle bundle){
-        int num = -1;
-        if(bundle != null){
-            num = bundle.getInt("Type");
-        }
+    private int setPurpose(Intent intent){
+        int num = intent.getIntExtra("Type",-1);
         switch(num){
-
             case 0:
-                //do something
+                //create
                 break;
-
             case 1:
-                //do something
-                break;
+                //edit
+                event = (Event) intent.getParcelableExtra("Event");
+                mButton.setText("Edit");
+                mTitle.setText(event.getTitle());
+                mDescription.setText(event.getDescription());
 
+                Date sd = event.getStartDate();
+                mStartDateText.setText(sd.toString());
+                Date ed = event.getEndDate();
+                mEndDateText.setText(ed.toString());
+
+                pickedStart = sd.getTime();
+                pickedEnd = ed.getTime();
+                break;
             case 2:
-                //do something
+                //share
+                event = (Event) intent.getParcelableExtra("Event");
+                mButton.setText("Share");
                 break;
-
             case -1:
+                // Shouldn't happen.
                 finish();
                 break;
         }
-
+        return num;
     }
-
 }

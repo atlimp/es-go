@@ -40,7 +40,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         Date startDate = new Date(0);
         Date endDate = new Date();
-
+        setListeners();
         String token = TokenStore.getToken(this.getApplicationContext());
         c.getEvents(startDate, endDate, token, new Callback() {
             @Override

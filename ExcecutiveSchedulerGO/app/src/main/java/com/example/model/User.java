@@ -94,8 +94,6 @@ public class User implements Parcelable {
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>(){
 
         public User createFromParcel(Parcel in){
-            ArrayList<Event> inEvents = new ArrayList<Event>();
-            in.readList(inEvents, Event.class.getClassLoader());
             return new User(in.readString(),in.readString(),in.readString(),in.readString());
         }
 
