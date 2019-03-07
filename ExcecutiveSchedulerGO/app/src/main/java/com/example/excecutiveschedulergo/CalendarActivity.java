@@ -84,6 +84,7 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 toolbar.event = (Event) parent.getItemAtPosition(position);
+
             }
         });
     }
