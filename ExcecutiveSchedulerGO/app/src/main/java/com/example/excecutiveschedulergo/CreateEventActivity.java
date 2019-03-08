@@ -45,10 +45,12 @@ public class CreateEventActivity extends AppCompatActivity {
     private long pickedStart;
     private long pickedEnd;
 
+    private Event event;
+
     private int year, month, day, hour, minute;
     private int purpose;
 
-    private Event event;
+    String token;
 
     private final Connection c = Connection.getInstance();
 
@@ -59,7 +61,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
         toolbar = new Toolbar(this);
         setListeners();
-        setPurpose(getIntent());
+        purpose = setPurpose(getIntent());
     }
 
     private void setListeners() {
@@ -184,20 +186,19 @@ public class CreateEventActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.v("CreateEventListener","Purpose: " + purpose);
                 switch(purpose){
                     case 0:
                         createEvent();
                         break;
                     case 1:
-                        editEvent(event);
+                        editEvent();
                         break;
                     case 2:
-                        shareEvent(event);
+                        shareEvent();
                         break;
 
                 }
-
-                createEvent();
             }
         });
 
@@ -226,9 +227,6 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void createEvent() {
-        String title = mTitle.getText().toString();
-        String description = mDescription.getText().toString();
-
         /**
          Calendar start = new GregorianCalendar(
          mStartDate.getYear(),
@@ -241,19 +239,11 @@ public class CreateEventActivity extends AppCompatActivity {
          mEndDate.getMonth(),
          mEndDate.getDayOfMonth()
          );
-         */
-        Date startDate = new Date(pickedStart);
-        Date endDate = new Date(pickedEnd);
+        */
 
-        Event event = new Event();
+        event = new Event();
+        setFields();
 
-        event.setTitle(title);
-        event.setDescription(description);
-        event.setStartDate(startDate);
-        event.setEndDate(endDate);
-
-
-        String token = TokenStore.getToken(this.getApplicationContext());
         Log.e("Token: ", token);
         c.createEvent(event, token, new Callback() {
             @Override
@@ -274,13 +264,37 @@ public class CreateEventActivity extends AppCompatActivity {
         });
     }
 
-    private void editEvent(Event event){
+    /**
+     * Finds event in backend and saves the new data to it.
+     * @param event
+     */
+    private void editEvent(){
+        //TODO: unite code between methods.
+
+        c.editEvent(event,token, new Callback(){
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("Edit Event: ", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+
+                if (response.isSuccessful()) {
+                    Log.v("Edit event", json);
+                } else {
+                    Log.e("Edit event", json);
+                }
+            }
+        });
 
 
     }
 
-    private void shareEvent(Event event){
-
+    private void shareEvent(){
+        //TODO: Hide elements and replace with user list, add user button and textfield.
+        editEvent();
     }
 
     /**
@@ -321,5 +335,13 @@ public class CreateEventActivity extends AppCompatActivity {
                 break;
         }
         return num;
+    }
+
+    private void setFields(){
+        token = TokenStore.getToken(this.getApplicationContext());
+        event.setTitle(mTitle.getText().toString());
+        event.setDescription(mDescription.getText().toString());
+        event.setStartDate(new Date(pickedStart));
+        event.setEndDate(new Date(pickedEnd));
     }
 }
