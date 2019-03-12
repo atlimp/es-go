@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.Connection.Connection;
 import com.example.model.Event;
@@ -17,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -85,6 +88,24 @@ public class CalendarActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 toolbar.event = (Event) parent.getItemAtPosition(position);
 
+            }
+        });
+
+        mList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
+                Event event = (Event) parent.getItemAtPosition(position);
+                LinearLayout mCardView = findViewById(R.id.CardView);
+                mCardView.setVisibility(View.VISIBLE);
+                TextView mTitle = findViewById(R.id.CardTitle);
+                mTitle.setText(event.getTitle());
+                TextView mDescription = findViewById(R.id.CardDescription);
+                mDescription.setText(event.getDescription());
+                TextView mStartDate = findViewById(R.id.CardStartDate);
+                mStartDate.setText(event.getStartDate().toString());
+                TextView mEndDate = findViewById(R.id.CardStartDate);
+                mEndDate.setText(event.getEndDate().toString());
+                return true;
             }
         });
     }

@@ -266,7 +266,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     /**
      * Finds event in backend and saves the new data to it.
-     * @param event
+     * @param
      */
     private void editEvent(){
         //TODO: unite code between methods.
