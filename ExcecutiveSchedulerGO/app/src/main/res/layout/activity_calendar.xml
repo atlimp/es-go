@@ -31,28 +31,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/card_background"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_margin="@dimen/textboxMargin">
+        android:layout_margin="@dimen/cardMargin">
 
         <TextView
             android:id="@+id/CardTitle"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:textSize="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/CardDescription"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/CardStartDate"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/CardEndDate"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

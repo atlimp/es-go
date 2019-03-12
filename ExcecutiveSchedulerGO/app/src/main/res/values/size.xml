@@ -3,4 +3,5 @@
     <dimen name="textbox">150dp</dimen>
     <dimen name="textboxMargin">12dp</dimen>
     <dimen name="textboxPadding">10dp</dimen>
+    <dimen name="cardMargin">80dp</dimen>
 </resources>

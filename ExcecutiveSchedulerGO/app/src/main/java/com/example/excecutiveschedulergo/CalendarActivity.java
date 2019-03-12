@@ -103,9 +103,17 @@ public class CalendarActivity extends AppCompatActivity {
                 mDescription.setText(event.getDescription());
                 TextView mStartDate = findViewById(R.id.CardStartDate);
                 mStartDate.setText(event.getStartDate().toString());
-                TextView mEndDate = findViewById(R.id.CardStartDate);
+                TextView mEndDate = findViewById(R.id.CardEndDate);
                 mEndDate.setText(event.getEndDate().toString());
                 return true;
+            }
+        });
+
+        LinearLayout mCard = findViewById(R.id.CardView);
+        mCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCard.setVisibility(View.GONE);
             }
         });
     }
