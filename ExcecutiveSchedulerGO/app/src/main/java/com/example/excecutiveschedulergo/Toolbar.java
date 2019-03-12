@@ -61,11 +61,8 @@ public class Toolbar {
         mShare.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(activity.getApplicationContext(), CreateEventActivity.class);
+                Intent intent = new Intent(activity.getApplicationContext(), ShareEventActicity.class);
                 intent.putExtra("Event", event);
-
-                intent.putExtra("Type", 2);
-
                 //Bundle bundle = new Bundle();
                 //bundle.putInt("Type", 2);
                 //bundle.putParcelable("Event", event);
@@ -78,7 +75,7 @@ public class Toolbar {
         mLogout.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                TokenStore.setToken("",activity.getApplicationContext());
+                TokenStore.deleteToken(activity.getApplicationContext());
                 activity.finish();
             }
         });

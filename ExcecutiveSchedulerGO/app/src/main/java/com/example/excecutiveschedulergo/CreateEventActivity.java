@@ -50,8 +50,6 @@ public class CreateEventActivity extends AppCompatActivity {
     private int year, month, day, hour, minute;
     private int purpose;
 
-    String token;
-
     private final Connection c = Connection.getInstance();
 
     @Override
@@ -244,6 +242,8 @@ public class CreateEventActivity extends AppCompatActivity {
         event = new Event();
         setFields();
 
+        String token = TokenStore.getToken(this.getApplicationContext());
+
         Log.e("Token: ", token);
         c.createEvent(event, token, new Callback() {
             @Override
@@ -270,6 +270,9 @@ public class CreateEventActivity extends AppCompatActivity {
      */
     private void editEvent(){
         //TODO: unite code between methods.
+
+        String token = TokenStore.getToken(this.getApplicationContext());
+        setFields();
 
         c.editEvent(event,token, new Callback(){
             @Override
@@ -338,7 +341,6 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void setFields(){
-        token = TokenStore.getToken(this.getApplicationContext());
         event.setTitle(mTitle.getText().toString());
         event.setDescription(mDescription.getText().toString());
         event.setStartDate(new Date(pickedStart));

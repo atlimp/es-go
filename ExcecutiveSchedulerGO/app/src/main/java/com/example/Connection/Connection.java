@@ -152,8 +152,8 @@ public class Connection {
         this.get(endPoint, token, c);
     }
 
-    public void shareEvent(List<User> users, Event event, String token, Callback c) {
-        String endPoint = "/event/" + event.getId();
+    public void shareEvent(List<String> users, Event event, String token, Callback c) {
+        String endPoint = "/event/" + event.getId() + "/users";
         this.post(endPoint, users, token, c);
     }
 
