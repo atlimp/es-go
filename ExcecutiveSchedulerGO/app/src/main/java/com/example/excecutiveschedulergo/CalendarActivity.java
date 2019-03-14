@@ -18,10 +18,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -82,6 +84,14 @@ public class CalendarActivity extends AppCompatActivity {
         });
     }
 
+    private String dateString(Date date) {
+        Locale loc = new Locale("is", "IS");
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, loc);
+        DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, loc);
+
+        return dateFormat.format(date) + " " + timeFormat.format(date);
+    }
+
     private void setListeners(){
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -102,9 +112,9 @@ public class CalendarActivity extends AppCompatActivity {
                 TextView mDescription = findViewById(R.id.CardDescription);
                 mDescription.setText(event.getDescription());
                 TextView mStartDate = findViewById(R.id.CardStartDate);
-                mStartDate.setText(event.getStartDate().toString());
+                mStartDate.setText(dateString(event.getStartDate()));
                 TextView mEndDate = findViewById(R.id.CardEndDate);
-                mEndDate.setText(event.getEndDate().toString());
+                mEndDate.setText(dateString(event.getEndDate()));
 
                 // Set userlist on card
                 ListView mUserList = findViewById(R.id.CardUsers);
