@@ -105,6 +105,18 @@ public class CalendarActivity extends AppCompatActivity {
                 mStartDate.setText(event.getStartDate().toString());
                 TextView mEndDate = findViewById(R.id.CardEndDate);
                 mEndDate.setText(event.getEndDate().toString());
+
+                // Set userlist on card
+                ListView mUserList = findViewById(R.id.CardUsers);
+                List<User> users = event.getUsers();
+
+                ArrayAdapter<User> adapter = new ArrayAdapter<User>(
+                        CalendarActivity.this,
+                        android.R.layout.simple_list_item_1,
+                        users
+                );
+
+                mUserList.setAdapter(adapter);
                 return true;
             }
         });
