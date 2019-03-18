@@ -1,10 +1,12 @@
 package com.example.excecutiveschedulergo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.Connection.Connection;
 import com.example.model.Event;
@@ -46,7 +48,13 @@ public class Toolbar {
         mEdit.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(activity.getApplicationContext(), CreateEventActivity.class);
+                Context context = activity.getApplicationContext();
+                if(event == null) {
+                    Toast toast = Toast.makeText(context, "Please select an event", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                Intent intent = new Intent(context, CreateEventActivity.class);
                 intent.putExtra("Event", event);
                 intent.putExtra("Type", 1);
                 // Bundle bundle = new Bundle();
@@ -61,7 +69,13 @@ public class Toolbar {
         mShare.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(activity.getApplicationContext(), ShareEventActicity.class);
+                Context context = activity.getApplicationContext();
+                if(event == null) {
+                    Toast toast = Toast.makeText(context, "Please select an event", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                Intent intent = new Intent(context, ShareEventActicity.class);
                 intent.putExtra("Event", event);
                 //Bundle bundle = new Bundle();
                 //bundle.putInt("Type", 2);
