@@ -1,0 +1,15 @@
+Cursor fer fyrst í password í login
+Vantar tilkynningu um að login tókst
+Redirect eftir login?
+Nota JSONObject fyrir öll gögn, bæta við klösum á framenda til að halda utan um gögn
+Tapar virkni í landscape
+Abstracta HTTP virkni
+Menubar kóði er endurtekinn
+m prefix er ekki í samræmi við hefðir
+Login er GET Request?
+Mikið af mismunandi URL, hafa einn static variable
+ArrayList fyrir allt dótið
+Gengið útfrá því að allir listar séu í eins röð
+Röðunaraðferð er skrítin, er alltaf að bera saman strengi.  Líka fyrir price og alcohol.  (Double.parseDouble(a.get(KEY_NAME)))
+UI er töff.
+
