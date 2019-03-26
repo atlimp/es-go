@@ -30,6 +30,12 @@
             android:layout_height="wrap_content"
             android:text="@string/createEvent"/>
 
+        <Button
+            android:id="@+id/fragments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fragments"/>
+
     </LinearLayout>
 
 

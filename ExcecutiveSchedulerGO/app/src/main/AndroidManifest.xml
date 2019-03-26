@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ESGO">
-        <activity android:name=".ShareEventActicity"></activity>
+        <activity
+            android:name=".FragmentActivity"
+            android:configChanges="orientation|screenSize"
+            ></activity>
+        <activity android:name=".ShareEventActicity" />
         <activity android:name=".CalendarActivity" />
         <activity
             android:name=".CreateEventActivity"
