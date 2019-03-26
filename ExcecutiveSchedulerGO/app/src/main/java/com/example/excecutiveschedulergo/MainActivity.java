@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.example.Connection.Connection;
 import java.io.IOException;
@@ -53,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("Type", 0);
                 createEvent.putExtras(bundle);
+                startActivity(createEvent);
+            }
+        });
+
+        Button fragments = findViewById(R.id.fragments);
+        fragments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createEvent = new Intent(getApplicationContext(), FragmentActivity.class);
                 startActivity(createEvent);
             }
         });
