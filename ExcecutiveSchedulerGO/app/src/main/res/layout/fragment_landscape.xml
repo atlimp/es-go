@@ -11,4 +11,59 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_landscape" />
 
+    <LinearLayout
+        android:id="@+id/list_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <ListView
+            android:id="@+id/labels"
+            android:layout_width="@dimen/labelWidth"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_ui"></ListView>
+
+        <ListView
+            android:id="@+id/monday"
+            android:layout_width="@dimen/dayWidth"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_ui"></ListView>
+
+        <ListView
+            android:id="@+id/tuesday"
+            android:layout_width="@dimen/dayWidth"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_ui"></ListView>
+
+        <ListView
+            android:id="@+id/wednesday"
+            android:layout_width="@dimen/dayWidth"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_ui"></ListView>
+
+        <ListView
+            android:id="@+id/thursday"
+            android:layout_width="@dimen/dayWidth"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_ui"></ListView>
+
+        <ListView
+            android:id="@+id/friday"
+            android:layout_width="@dimen/dayWidth"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_ui"></ListView>
+
+        <ListView
+            android:id="@+id/saturday"
+            android:layout_width="@dimen/dayWidth"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_ui"></ListView>
+
+        <ListView
+            android:id="@+id/sunday"
+            android:layout_width="@dimen/dayWidth"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_ui"></ListView>
+    </LinearLayout>
+
 </FrameLayout>

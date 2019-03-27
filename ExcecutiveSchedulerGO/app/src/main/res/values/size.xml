@@ -4,4 +4,6 @@
     <dimen name="textboxMargin">12dp</dimen>
     <dimen name="textboxPadding">10dp</dimen>
     <dimen name="cardMargin">80dp</dimen>
+    <dimen name="dayWidth">96dp</dimen>
+    <dimen name="labelWidth">60dp</dimen>
 </resources>
