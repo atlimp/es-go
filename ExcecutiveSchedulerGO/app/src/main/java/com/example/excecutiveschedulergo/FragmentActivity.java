@@ -19,6 +19,10 @@ public class FragmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
+
+        mPortaitFragment = new PortraitFragment();
+        mPortaitFragment.setActivity(this);
+        setFragment(mPortaitFragment);
     }
 
     @Override
@@ -32,13 +36,13 @@ public class FragmentActivity extends AppCompatActivity {
             Log.e("Fragment", "landscape");
             if (mLandscapeFragment == null) {
                 mLandscapeFragment = new LandscapeFragment();
-
             }
             setFragment(mLandscapeFragment);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
             Log.e("Fragment", "portrait");
             if (mPortaitFragment == null) {
                 mPortaitFragment = new PortraitFragment();
+                mPortaitFragment.setActivity(this);
             }
             setFragment(mPortaitFragment);
         }
