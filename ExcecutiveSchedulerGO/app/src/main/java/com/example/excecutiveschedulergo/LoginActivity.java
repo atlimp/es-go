@@ -27,7 +27,6 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button mLoginButton;
     private Button mDoneButton;
     private EditText mUsernameField;
     private EditText mPasswordField;
@@ -159,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
         // ...Maybe hash before sending.
         password = mPasswordField.getText().toString();
 
-        user.setUsername(username);
+        user.setUsername(username.toLowerCase());
         user.setPassword(password);
 
         if(createNew) create(user);
@@ -176,18 +175,6 @@ public class LoginActivity extends AppCompatActivity {
      * Set all listeners
      */
     private void setListeners(){
-
-        // Change name of the button
-        mLoginButton = findViewById(R.id.loginButton);
-
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent back = new Intent(getApplicationContext(), MainActivity.class);
-
-                startActivity(back);
-            }
-        });
 
         // Replace default text with empty string on focus change.
         mUsernameField = findViewById(R.id.username);
