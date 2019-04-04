@@ -123,7 +123,6 @@ public class LandscapeFragment extends Fragment {
     /**
      * From https://stackoverflow.com/a/12342853
      * Makes all the lists move together.
-     * @param lv
      */
     private void tandem(){
         for(ListView lv : all) {

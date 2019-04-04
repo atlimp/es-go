@@ -32,15 +32,12 @@ public class FragmentActivity extends AppCompatActivity {
             Log.e("Fragment", "landscape");
             if (mLandscapeFragment == null) {
                 mLandscapeFragment = new LandscapeFragment();
-
-            }
-            setFragment(mLandscapeFragment);
+            } setFragment(mLandscapeFragment);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
             Log.e("Fragment", "portrait");
             if (mPortaitFragment == null) {
                 mPortaitFragment = new PortraitFragment();
-            }
-            setFragment(mPortaitFragment);
+            } setFragment(mPortaitFragment);
         }
     }
 
