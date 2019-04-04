@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.example.Connection.Connection;
 import com.example.model.User;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
