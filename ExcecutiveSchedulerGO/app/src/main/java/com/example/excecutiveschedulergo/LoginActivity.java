@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.Connection.Connection;
 import com.example.model.User;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mName;
     private boolean createNew;
     private String username, password, name;
+    private String registerFailMessages;
 
     private final Connection c = Connection.getInstance();
 
@@ -62,7 +64,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void registerFailed() {
         Log.e("Login Activity - Login: ", "Register failed");
-        Toast.makeText(LoginActivity.this, R.string.registerFail, Toast.LENGTH_LONG).show();
+        if(registerFailMessages == null) {
+            Toast.makeText(LoginActivity.this, R.string.registerFail, Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(LoginActivity.this, registerFailMessages, Toast.LENGTH_LONG).show();
+        }
+
+        registerFailMessages = null;
+
     }
 
     private void loginSuccessful() {
@@ -135,6 +145,13 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("Login Activity - Login(create): ", response.body().string());
                     login(user);
                 } else {
+                    try {
+                        JSONObject json = new JSONObject(response.body().string());
+                        registerFailMessages = json.getString("message");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
