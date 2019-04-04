@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUsernameField;
     private EditText mPasswordField;
     private TextView mCreate;
+    private TextView mTvCreate;
     private EditText mName;
     private boolean createNew;
     private String username, password, name;
@@ -235,17 +236,22 @@ public class LoginActivity extends AppCompatActivity {
 
         mCreate = findViewById(R.id.create);
         mName = findViewById(R.id.name);
+        mTvCreate = findViewById(R.id.tvname);
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!createNew) {
-                    mCreate.setText("Name");
                     mName.setVisibility(View.VISIBLE);
                     mName.setText("");
+                    mTvCreate.setVisibility(View.VISIBLE);
+                    mCreate.setText("Already have an account?");
+                    mDoneButton.setText("Register and Login");
                     createNew = true;
                 } else {
                     mCreate.setText("Click to create new User");
+                    mDoneButton.setText("Login");
                     mName.setVisibility(View.GONE);
+                    mTvCreate.setVisibility(View.GONE);
                     createNew = false;
                 }
             }

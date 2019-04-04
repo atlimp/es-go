@@ -2,6 +2,7 @@
     <string name="app_name">ExcecutiveSchedulerGO</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="name">Name</string>
     <string name="login">Login</string>
     <string name="createEvent">Create Event</string>
     <string name="calendar">Calendar</string>
@@ -16,7 +17,7 @@
     <string name="create">Create</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
-
+    <string name="tvname">tvname</string>
     <string name="hello_landscape">Landscape</string>
     <string name="hello_portrait">Portrait</string>
 </resources>
