@@ -42,19 +42,29 @@ public class MainActivity extends AppCompatActivity {
         mCalendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
-                startActivity(calendar);
+                if(TokenStore.getToken(getApplicationContext()) == null){
+                    Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(login);
+                } else{
+                    Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                    startActivity(calendar);
+                }
             }
         });
 
         mCreateEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent createEvent = new Intent(getApplicationContext(), CreateEventActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("Type", 0);
-                createEvent.putExtras(bundle);
-                startActivity(createEvent);
+                if(TokenStore.getToken(getApplicationContext()) == null){
+                    Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(login);
+                } else {
+                    Intent createEvent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("Type", 0);
+                    createEvent.putExtras(bundle);
+                    startActivity(createEvent);
+                }
             }
         });
 
