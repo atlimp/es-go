@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.login_button);
         mCalendarButton = findViewById(R.id.calendar_button);
         mCreateEventButton = findViewById(R.id.create_event_button);
-
+        
         updateLoginButtonText();
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -43,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     Intent login = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(login);
-                    // Þarf að laga þetta, galli ef farið er til baka án þess að successfully
-                    // logga sig inn, þá er takkinn breyttur en notandi ennþá ekki loggaður inn.
-                    mLoginButton.setText("Logout");
 
                 }
             }
@@ -94,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop(){
         super.onStop();
         Log.e("Main activity on stop: ", "stopped");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateLoginButtonText();
     }
 
     // Fall sem uppfærir login takkann eftir því hvort notandi sé loggaður inn.
