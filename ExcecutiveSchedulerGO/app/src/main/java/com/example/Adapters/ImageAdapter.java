@@ -33,7 +33,7 @@ public class ImageAdapter extends BaseAdapter {
     public ImageAdapter(Context c, Boolean logged) {
         mContext = c;
         mLogged = logged;
-        if(logged) mThumbIds[2] = R.drawable.ic_logouticon;
+        setLogin(logged);
     }
 
     public int getCount() { return mThumbIds.length; }
