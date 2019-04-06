@@ -262,6 +262,10 @@ public class CreateEventActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Þegar búið er að gera event er notandanum síðan redirectað aftur í calendar.
+        Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+        startActivity(calendar);
     }
 
     /**

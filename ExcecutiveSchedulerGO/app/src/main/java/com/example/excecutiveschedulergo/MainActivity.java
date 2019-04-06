@@ -16,7 +16,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mLoginButton;
+    protected Button mLoginButton;
     private Button mCalendarButton;
     private Button mCreateEventButton;
 
@@ -31,11 +31,23 @@ public class MainActivity extends AppCompatActivity {
         mCalendarButton = findViewById(R.id.calendar_button);
         mCreateEventButton = findViewById(R.id.create_event_button);
 
+        updateLoginButtonText();
+
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(login);
+                if (TokenStore.getToken(getApplicationContext()) != null) {
+                    TokenStore.deleteToken(getApplicationContext());
+                    updateLoginButtonText();
+                }
+                else {
+                    Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(login);
+                    // Þarf að laga þetta, galli ef farið er til baka án þess að successfully
+                    // logga sig inn, þá er takkinn breyttur en notandi ennþá ekki loggaður inn.
+                    mLoginButton.setText("Logout");
+
+                }
             }
         });
 
@@ -82,5 +94,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop(){
         super.onStop();
         Log.e("Main activity on stop: ", "stopped");
+    }
+
+    // Fall sem uppfærir login takkann eftir því hvort notandi sé loggaður inn.
+    protected void updateLoginButtonText() {
+        if(TokenStore.getToken(getApplicationContext()) == null) {
+            mLoginButton.setText("Login");
+        }
+        else {
+            mLoginButton.setText("Logout");
+        }
     }
 }
