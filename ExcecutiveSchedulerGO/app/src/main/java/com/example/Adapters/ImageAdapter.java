@@ -1,6 +1,7 @@
 package com.example.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.example.excecutiveschedulergo.CreateEventActivity;
+import com.example.excecutiveschedulergo.FragmentActivity;
+import com.example.excecutiveschedulergo.LoginActivity;
 import com.example.excecutiveschedulergo.R;
+import com.example.excecutiveschedulergo.TokenStore;
 
 public class ImageAdapter extends BaseAdapter {
 
@@ -49,6 +54,42 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         } imageView.setImageResource(mThumbIds[position]);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(position) {
+                    case 0:
+                        if(TokenStore.getToken(mContext) == null) {
+                            Intent login = new Intent(mContext, LoginActivity.class);
+                            mContext.startActivity(login);
+                        } else {
+                            Intent calendar = new Intent(mContext, FragmentActivity.class);
+                            mContext.startActivity(calendar);
+                        }
+                        break;
+                    case 1:
+                        if(TokenStore.getToken(mContext) == null) {
+                            Intent login = new Intent(mContext, LoginActivity.class);
+                            mContext.startActivity(login);
+                        } else {
+                            Intent createEvent = new Intent(mContext, CreateEventActivity.class);
+                            mContext.startActivity(createEvent);
+                        }
+                        break;
+                    case 2:
+                        setLogin(TokenStore.getToken(mContext) == null);
+                        if (TokenStore.getToken(mContext) != null) {
+                            TokenStore.deleteToken(mContext);
+                        } else {
+                            Intent login = new Intent(mContext, LoginActivity.class);
+                            mContext.startActivity(login);
+                        }
+                        break;
+                    default:
+
+                }
+            }
+        });
         return imageView;
     }
 
