@@ -257,15 +257,14 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     Log.v("Create event", json);
+                    // Þegar búið er að gera event er notandanum síðan redirectað aftur í calendar.
+                    Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                    startActivity(calendar);
                 } else {
                     Log.e("Create event", json);
                 }
             }
         });
-
-        // Þegar búið er að gera event er notandanum síðan redirectað aftur í calendar.
-        Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
-        startActivity(calendar);
     }
 
     /**
