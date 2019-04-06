@@ -187,7 +187,7 @@ public class CreateEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.v("Cancel","");
-                Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                 startActivity(calendar);
             }
         });
