@@ -26,6 +26,21 @@ public class Toolbar {
         setListeners();
     }
 
+    public Toolbar(Activity _activity, boolean isMain) {
+        mCreate  = _activity.findViewById(R.id.create_event);
+        mEdit    = _activity.findViewById(R.id.edit_event);
+        mShare   = _activity.findViewById(R.id.share_event);
+        mLogout  = _activity.findViewById(R.id.logout);
+        activity = _activity;
+
+        mCreate.setVisibility(View.GONE);
+        mEdit.setVisibility(View.GONE);
+        mShare.setVisibility(View.GONE);
+
+
+        setListeners();
+    }
+
     /**
      * From https://stackoverflow.com/a/3913720
      * Passing int parameter to opening Activity to determine the layout.

@@ -20,4 +20,6 @@
     <string name="tvname">tvname</string>
     <string name="hello_landscape">Landscape</string>
     <string name="hello_portrait">Portrait</string>
+    <string name="prev">Previous</string>
+    <string name="next">Next</string>
 </resources>

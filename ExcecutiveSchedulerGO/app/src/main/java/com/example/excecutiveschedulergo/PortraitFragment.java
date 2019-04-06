@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.Connection.Connection;
@@ -24,7 +26,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -42,6 +46,14 @@ public class PortraitFragment extends Fragment {
     FragmentActivity activity;
     View view;
 
+    Button mPrevButton;
+    Button mNextButton;
+    TextView mCurrentDate;
+    ProgressBar mCalendarProgress;
+
+    Calendar startCal;
+    Calendar endCal;
+
     public PortraitFragment() {
         // Required empty public constructor
     }
@@ -56,49 +68,25 @@ public class PortraitFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_portrait, container, false);
 
-
         mList = view.findViewById(R.id.list);
         toolbar = new Toolbar(activity);
 
-        Date startDate = new Date(0);
-        Date endDate = new Date();
+        mPrevButton = view.findViewById(R.id.prevDayButton);
+        mNextButton = view.findViewById(R.id.nextDayButton);
+
+        mCurrentDate = view.findViewById(R.id.currentDate);
+
+        mCalendarProgress = view.findViewById(R.id.calendarProgress);
+
+        Calendar today = new GregorianCalendar();
+
+        startCal = new GregorianCalendar(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
+        endCal = (Calendar) startCal.clone();
+        endCal.add(Calendar.DATE, 1);
+
         setListeners();
-        String token = TokenStore.getToken(activity.getApplicationContext());
-        c.getEvents(startDate, endDate, token, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("Get events", e.getMessage());
-            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String json = response.body().string();
-
-                if (response.isSuccessful()) {
-                    Log.e("Get events", json);
-                    Gson gson = new Gson();
-
-                    Type type = new TypeToken<ArrayList<Event>>(){}.getType();
-                    List events = gson.fromJson(json, type);
-                    Log.e("List size", "" + events.size());
-
-                    ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(
-                            activity.getApplicationContext(),
-                            android.R.layout.simple_list_item_1,
-                            events
-                    );
-
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mList.setAdapter(adapter);
-                        }
-                    });
-                } else {
-                    Log.e("Get events", json);
-                }
-            }
-        });
+        reloadData();
 
         return view;
     }
@@ -157,6 +145,77 @@ public class PortraitFragment extends Fragment {
                 mCard.setVisibility(View.GONE);
             }
         });
+
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCal.add(Calendar.DATE, -1);
+                endCal.add(Calendar.DATE, -1);
+                reloadData();
+            }
+        });
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCal.add(Calendar.DATE, 1);
+                endCal.add(Calendar.DATE, 1);
+                reloadData();
+            }
+        });
+    }
+
+    private void reloadData() {
+        mCalendarProgress.setVisibility(View.VISIBLE);
+
+        ArrayAdapter<Event> clearEvents = new ArrayAdapter<Event>(
+                activity.getApplicationContext(),
+                android.R.layout.simple_list_item_1,
+                new ArrayList<Event>()
+        );
+
+        mList.setAdapter(clearEvents);
+
+        mCurrentDate.setText("" + startCal.get(Calendar.DAY_OF_MONTH) + "." + startCal.get(Calendar.MONTH) + "." + startCal.get(Calendar.YEAR));
+
+        String token = TokenStore.getToken(activity.getApplicationContext());
+        c.getEvents(new Date(startCal.getTimeInMillis()), new Date(endCal.getTimeInMillis()), token, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("Get events", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+
+                if (response.isSuccessful()) {
+                    Log.e("Get events", json);
+                    Gson gson = new Gson();
+
+                    Type type = new TypeToken<ArrayList<Event>>(){}.getType();
+                    List events = gson.fromJson(json, type);
+                    Log.e("List size", "" + events.size());
+
+                    ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(
+                            activity.getApplicationContext(),
+                            android.R.layout.simple_list_item_1,
+                            events
+                    );
+
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mCalendarProgress.setVisibility(View.GONE);
+                            mList.setAdapter(adapter);
+                        }
+                    });
+                } else {
+                    Log.e("Get events", json);
+                }
+            }
+        });
+
     }
 
 }
