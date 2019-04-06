@@ -7,7 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.TextView;
+
+import com.example.Adapters.ImageAdapter;
 import com.example.Connection.Connection;
 import java.io.IOException;
 import okhttp3.Call;
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected Button mLoginButton;
     private Button mCalendarButton;
     private Button mCreateEventButton;
+    private GridView mGridView;
 
     private final Connection c = Connection.getInstance();
 
@@ -27,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mGridView = findViewById(R.id.the_grid);
+        ImageAdapter adapter = new ImageAdapter(this, TokenStore.getToken(getApplicationContext()) != null);
+        mGridView.setAdapter(adapter);
         mLoginButton = findViewById(R.id.login_button);
         mCalendarButton = findViewById(R.id.calendar_button);
         mCreateEventButton = findViewById(R.id.create_event_button);
@@ -36,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                adapter.setLogin(TokenStore.getToken(getApplicationContext()) == null);
                 if (TokenStore.getToken(getApplicationContext()) != null) {
                     TokenStore.deleteToken(getApplicationContext());
                     updateLoginButtonText();

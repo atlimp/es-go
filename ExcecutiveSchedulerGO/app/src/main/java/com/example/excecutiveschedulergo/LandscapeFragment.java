@@ -58,7 +58,6 @@ public class LandscapeFragment extends Fragment {
         int width           = dm.widthPixels;
         int height          = dm.heightPixels;
 
-
         int max             = (width > height) ? width : height;
         int counter         = 0;
 
@@ -82,7 +81,6 @@ public class LandscapeFragment extends Fragment {
         tandem();
     }
 
-
     private ArrayList<ListView> getComponents(View view) {
         LinearLayout layout = view.findViewById(R.id.list_holder);
         ArrayList<ListView> result = new ArrayList<>();
@@ -90,7 +88,6 @@ public class LandscapeFragment extends Fragment {
             View v = layout.getChildAt(i);
             if (v instanceof ListView) {
                 result.add((ListView) v);
-
             }
         } return result;
     }
@@ -140,9 +137,7 @@ public class LandscapeFragment extends Fragment {
                             clickSource = v;
                             touchSource = null;
                         }
-                    }
-
-                    return false;
+                    } return false;
                 }
             });
         }
