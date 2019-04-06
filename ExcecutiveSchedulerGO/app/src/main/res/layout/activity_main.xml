@@ -17,8 +17,10 @@
             android:id="@+id/the_grid"
             android:numColumns="2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:listSelector="@null"
+            android:stretchMode="columnWidth"
             >
 
 

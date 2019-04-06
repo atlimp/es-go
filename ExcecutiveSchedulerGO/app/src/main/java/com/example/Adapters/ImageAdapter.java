@@ -49,10 +49,13 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             imageView = new ImageView(mContext);
             DisplayMetrics dm = parent.getResources().getDisplayMetrics();
-            int width = (int) dm.widthPixels/2;
-            imageView.setLayoutParams(new GridView.LayoutParams(width, width));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(0, 0, 0, 0);
+            int w = (int) dm.widthPixels/2;
+            int h = (int) dm.heightPixels/2;
+            int min = (w < h) ? w : h;
+            imageView.setLayoutParams(new GridView.LayoutParams(min, min));
+            imageView.setAdjustViewBounds(true);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
         } else {
             imageView = (ImageView) convertView;
         } imageView.setImageResource(mThumbIds[position]);

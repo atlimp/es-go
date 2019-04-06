@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         mGridView = findViewById(R.id.the_grid);
         ImageAdapter adapter = new ImageAdapter(this, TokenStore.getToken(getApplicationContext()) != null);
         mGridView.setAdapter(adapter);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mGridView.getLayoutParams();
+        params.leftMargin = getResources().getDisplayMetrics().widthPixels / 6;
+        params.rightMargin = getResources().getDisplayMetrics().widthPixels / 6;
         mLoginButton = findViewById(R.id.login_button);
         mCalendarButton = findViewById(R.id.calendar_button);
         mCreateEventButton = findViewById(R.id.create_event_button);
