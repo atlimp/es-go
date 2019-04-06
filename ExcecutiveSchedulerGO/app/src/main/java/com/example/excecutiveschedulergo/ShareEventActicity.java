@@ -1,5 +1,6 @@
 package com.example.excecutiveschedulergo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,6 +79,10 @@ public class ShareEventActicity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     Log.v("Share event success", json);
+                    // Redirectum aftur i calendar view eftir ad vid shareum event
+                    Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                    startActivity(calendar);
+
                 } else {
                     Log.e("Share event fail", json);
                 }

@@ -290,6 +290,9 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     Log.v("Edit event", json);
+                    // Þegar notandi hefur klárað að edita event er honum redirectað í calendar
+                    Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                    startActivity(calendar);
                 } else {
                     Log.e("Edit event", json);
                 }
