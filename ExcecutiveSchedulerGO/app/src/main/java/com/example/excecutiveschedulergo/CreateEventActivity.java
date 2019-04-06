@@ -27,6 +27,7 @@ import okhttp3.Response;
 public class CreateEventActivity extends AppCompatActivity {
 
     private Button mButton;
+    private Button mCancel;
 
     private EditText mTitle;
     private EditText mDescription;
@@ -180,6 +181,16 @@ public class CreateEventActivity extends AppCompatActivity {
         //mEndDate = findViewById(R.id.create_endDate);
 
         mButton = findViewById(R.id.create_button);
+        mCancel = findViewById(R.id.cancel_button);
+
+        mCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("Cancel","");
+                Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                startActivity(calendar);
+            }
+        });
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,7 +206,9 @@ public class CreateEventActivity extends AppCompatActivity {
                     case 2:
                         shareEvent();
                         break;
-
+                    case 3:
+                        finish();
+                        break;
                 }
             }
         });
