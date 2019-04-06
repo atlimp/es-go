@@ -12,6 +12,18 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <GridView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/the_grid"
+            android:numColumns="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            >
+
+
+        </GridView>
+
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
