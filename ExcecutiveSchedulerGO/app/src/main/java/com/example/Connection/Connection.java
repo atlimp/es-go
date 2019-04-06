@@ -161,6 +161,10 @@ public class Connection {
         this.delete("/user", token, c);
     }
 
+    public void getAllUsers(String token, Callback c) {
+        this.get("/users", token, c);
+    }
+
 
     public static void main(String[] args) {
         Connection c = Connection.getInstance();

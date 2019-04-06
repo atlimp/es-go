@@ -24,6 +24,7 @@ public class ShareEventActicity extends AppCompatActivity {
     private Button mButton;
 
     private Toolbar toolbar;
+    private String users;
     private Connection c = Connection.getInstance();
 
     @Override
@@ -32,7 +33,7 @@ public class ShareEventActicity extends AppCompatActivity {
         setContentView(R.layout.activity_share_event_acticity);
 
         toolbar = new Toolbar(this);
-
+        getUsers();
         setListeners();
     }
 
@@ -58,13 +59,33 @@ public class ShareEventActicity extends AppCompatActivity {
         });
     }
 
+    private void getUsers(){
+        String token = TokenStore.getToken(this.getApplicationContext());
+        c.getAllUsers(token, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("Get Users", "Failed to get users");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    users = response.body().toString();
+                    Log.v("Share event success", users);
+                } else {
+                    Log.e("Share event fail", users);
+                }
+            }
+
+        });
+    }
+
     private void shareEvent() {
+        String token = TokenStore.getToken(this.getApplicationContext());
         Event event = (Event) (getIntent()).getParcelableExtra("Event");
         List<String> usernames = new ArrayList<String>();
 
         usernames.add(mUsername.getText().toString());
-
-        String token = TokenStore.getToken(this.getApplicationContext());
 
         c.shareEvent(usernames, event, token, new Callback() {
             @Override
