@@ -3,12 +3,10 @@ package com.example.excecutiveschedulergo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.Connection.Connection;
 import com.example.model.Event;
 
 public class Toolbar {
@@ -90,7 +88,7 @@ public class Toolbar {
                     toast.show();
                     return;
                 }
-                Intent intent = new Intent(context, ShareEventActicity.class);
+                Intent intent = new Intent(context, ShareEventActivity.class);
                 intent.putExtra("Event", event);
                 //Bundle bundle = new Bundle();
                 //bundle.putInt("Type", 2);

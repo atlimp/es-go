@@ -27,6 +27,7 @@ import okhttp3.Response;
 public class CreateEventActivity extends AppCompatActivity {
 
     private Button mButton;
+    private Button mCancel;
 
     private EditText mTitle;
     private EditText mDescription;
@@ -180,6 +181,16 @@ public class CreateEventActivity extends AppCompatActivity {
         //mEndDate = findViewById(R.id.create_endDate);
 
         mButton = findViewById(R.id.create_button);
+        mCancel = findViewById(R.id.cancel_button);
+
+        mCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("Cancel","");
+                Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
+                startActivity(calendar);
+            }
+        });
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,7 +206,9 @@ public class CreateEventActivity extends AppCompatActivity {
                     case 2:
                         shareEvent();
                         break;
-
+                    case 3:
+                        finish();
+                        break;
                 }
             }
         });
@@ -258,7 +271,7 @@ public class CreateEventActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.v("Create event", json);
                     // Þegar búið er að gera event er notandanum síðan redirectað aftur í calendar.
-                    Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                    Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 } else {
                     Log.e("Create event", json);
@@ -290,7 +303,7 @@ public class CreateEventActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.v("Edit event", json);
                     // Þegar notandi hefur klárað að edita event er honum redirectað í calendar
-                    Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                    Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 } else {
                     Log.e("Edit event", json);

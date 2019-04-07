@@ -103,6 +103,6 @@ public class User implements Parcelable {
     };
 
     public String toString() {
-        return this.name;
+        return this.username;
     }
 }

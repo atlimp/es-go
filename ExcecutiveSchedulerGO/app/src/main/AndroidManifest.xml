@@ -16,7 +16,7 @@
             android:name=".FragmentActivity"
             android:configChanges="orientation|screenSize"
             ></activity>
-        <activity android:name=".ShareEventActicity" />
+        <activity android:name=".ShareEventActivity" />
         <activity android:name=".CalendarActivity" />
         <activity
             android:name=".CreateEventActivity"

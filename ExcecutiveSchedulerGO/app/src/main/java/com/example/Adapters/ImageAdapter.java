@@ -2,7 +2,9 @@ package com.example.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -31,7 +33,7 @@ public class ImageAdapter extends BaseAdapter {
     public ImageAdapter(Context c, Boolean logged) {
         mContext = c;
         mLogged = logged;
-        if(logged) mThumbIds[2] = R.drawable.ic_logouticon;
+        setLogin(logged);
     }
 
     public int getCount() { return mThumbIds.length; }
@@ -47,10 +49,13 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             imageView = new ImageView(mContext);
             DisplayMetrics dm = parent.getResources().getDisplayMetrics();
-            int width = (int) dm.widthPixels/2;
-            imageView.setLayoutParams(new GridView.LayoutParams(width, width));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            int w = (int) dm.widthPixels/2;
+            int h = (int) dm.heightPixels/2;
+            int min = (w < h) ? w : h;
+            imageView.setLayoutParams(new GridView.LayoutParams(min, min));
+            imageView.setAdjustViewBounds(true);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
         } else {
             imageView = (ImageView) convertView;
         } imageView.setImageResource(mThumbIds[position]);
@@ -68,11 +73,15 @@ public class ImageAdapter extends BaseAdapter {
                         }
                         break;
                     case 1:
-                        if(TokenStore.getToken(mContext) == null) {
+                        Log.v("createEventListener", "listener activates");
+                        if(TokenStore.getToken(mContext) == null){
                             Intent login = new Intent(mContext, LoginActivity.class);
                             mContext.startActivity(login);
                         } else {
                             Intent createEvent = new Intent(mContext, CreateEventActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("Type", 0);
+                            createEvent.putExtras(bundle);
                             mContext.startActivity(createEvent);
                         }
                         break;
