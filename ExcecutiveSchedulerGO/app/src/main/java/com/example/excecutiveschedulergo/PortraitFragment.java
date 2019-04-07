@@ -166,8 +166,10 @@ public class PortraitFragment extends Fragment {
     }
 
     private void reloadData() {
+        // Set progress bar visibility
         mCalendarProgress.setVisibility(View.VISIBLE);
 
+        // Clear list view
         ArrayAdapter<Event> clearEvents = new ArrayAdapter<Event>(
                 activity.getApplicationContext(),
                 android.R.layout.simple_list_item_1,

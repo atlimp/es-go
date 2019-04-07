@@ -5,7 +5,598 @@
     android:layout_height="match_parent"
     tools:context=".LandscapeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/monday"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tuesday"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/wednesday"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/thursday"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/friday"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/saturday"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/sunday"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="00:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="00:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="01:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="01:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="02:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="02:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="03:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="03:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="04:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="04:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="05:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="05:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="06:00"/>
+
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="06:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="07:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="07:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="08:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="08:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="09:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="09:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="10:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="10:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="11:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="11:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="12:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="12:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="13:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="13:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="14:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="14:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="15:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="15:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="16:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="16:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="17:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="17:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="18:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="18:30"/>
+
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="19:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="19:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="20:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="20:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="21:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="21:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="22:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="22:30"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="23:00"/>
+
+                    <TextView
+                        android:textAllCaps="true"
+                        android:textSize="12dp"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:text="23:30"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:id="@+id/calendarMonday"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lightgrey">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:id="@+id/calendarTuesday"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/darkgrey">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:id="@+id/calendarWednesday"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lightgrey">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:id="@+id/calendarThursday"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/darkgrey">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:id="@+id/calendarFriday"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lightgrey">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:id="@+id/calendarSaturday"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/darkgrey">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:id="@+id/calendarSunday"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lightgrey">
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+<!--
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,5 +656,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/border_ui"></ListView>
     </LinearLayout>
+
+    -->
 
 </FrameLayout>

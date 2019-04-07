@@ -36,6 +36,7 @@ public class FragmentActivity extends AppCompatActivity {
             Log.e("Fragment", "landscape");
             if (mLandscapeFragment == null) {
                 mLandscapeFragment = new LandscapeFragment();
+                mLandscapeFragment.setActivity(this);
             }
             setFragment(mLandscapeFragment);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){

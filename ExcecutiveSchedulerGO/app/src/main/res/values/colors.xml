@@ -8,4 +8,6 @@
     <color name="blue">#3D5AFE</color>
     <color name="darkBlue">#271A86</color>
     <color name="yellow">#FFFF00</color>
+    <color name="darkgrey">#aaaaaa</color>
+    <color name="lightgrey">#dddddd</color>
 </resources>
