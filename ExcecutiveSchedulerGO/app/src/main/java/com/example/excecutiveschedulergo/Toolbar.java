@@ -13,13 +13,14 @@ public class Toolbar {
 
     private Activity    activity;
     public  Event       event;
-    public  Button      mCreate, mEdit, mShare, mLogout;
+    public  Button      mCreate, mEdit, mShare, mLogout, mDelete;
 
     public Toolbar(Activity _activity){
         mCreate  = _activity.findViewById(R.id.create_event);
         mEdit    = _activity.findViewById(R.id.edit_event);
         mShare   = _activity.findViewById(R.id.share_event);
         mLogout  = _activity.findViewById(R.id.logout);
+        mDelete  = _activity.findViewById(R.id.delete_event);
         activity = _activity;
         setListeners();
     }
@@ -29,11 +30,13 @@ public class Toolbar {
         mEdit    = _activity.findViewById(R.id.edit_event);
         mShare   = _activity.findViewById(R.id.share_event);
         mLogout  = _activity.findViewById(R.id.logout);
+        mDelete  = _activity.findViewById(R.id.delete_event);
         activity = _activity;
 
         mCreate.setVisibility(View.GONE);
         mEdit.setVisibility(View.GONE);
         mShare.setVisibility(View.GONE);
+        mDelete.setVisibility(View.GONE);
 
 
         setListeners();
@@ -104,6 +107,19 @@ public class Toolbar {
             public void onClick(View v){
                 TokenStore.deleteToken(activity.getApplicationContext());
                 activity.finish();
+            }
+        });
+
+        mDelete.setOnClickListener( new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Context context = activity.getApplicationContext();
+                if(event == null) {
+                    Toast toast = Toast.makeText(context, "Please select an event", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                // hmm, tharf ad tengja thetta einhvernveignn vid createEventActivity
             }
         });
 

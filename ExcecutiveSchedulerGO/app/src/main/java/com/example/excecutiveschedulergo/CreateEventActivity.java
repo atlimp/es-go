@@ -314,6 +314,35 @@ public class CreateEventActivity extends AppCompatActivity {
 
     }
 
+    public void deleteEvent(){
+        //TODO: unite code between methods.
+
+        String token = TokenStore.getToken(this.getApplicationContext());
+
+        c.deleteEvent(event,token, new Callback(){
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("Delete Event: ", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+
+                if (response.isSuccessful()) {
+                    Log.v("Delete event", json);
+                    // Þegar notandi hefur klárað að edita event er honum redirectað í calendar
+                    //Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
+                    //startActivity(calendar);
+                } else {
+                    Log.e("Delete event", json);
+                }
+            }
+        });
+
+
+    }
+
     private void shareEvent(){
         //TODO: Hide elements and replace with user list, add user button and textfield.
         editEvent();
