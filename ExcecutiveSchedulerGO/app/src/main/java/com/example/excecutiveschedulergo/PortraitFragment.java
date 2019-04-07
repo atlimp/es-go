@@ -108,6 +108,8 @@ public class PortraitFragment extends Fragment {
             }
         });
 
+
+        //TODO: mCardView seems to be null.  App crashes on long click.
         mList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){

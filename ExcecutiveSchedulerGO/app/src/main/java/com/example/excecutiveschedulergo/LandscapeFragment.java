@@ -52,14 +52,6 @@ public class LandscapeFragment extends Fragment {
 
     FragmentActivity activity;
 
-    RelativeLayout mCalendarMonday;
-    RelativeLayout mCalendarTuesday;
-    RelativeLayout mCalendarWednesday;
-    RelativeLayout mCalendarThursday;
-    RelativeLayout mCalendarFriday;
-    RelativeLayout mCalendarSaturday;
-    RelativeLayout mCalendarSunday;
-
     RelativeLayout[] days;
 
     Connection c = Connection.getInstance();
@@ -78,13 +70,13 @@ public class LandscapeFragment extends Fragment {
     }
 
     private void initDays(View view) {
-        mCalendarMonday = view.findViewById(R.id.calendarMonday);
-        mCalendarTuesday = view.findViewById(R.id.calendarTuesday);
-        mCalendarWednesday = view.findViewById(R.id.calendarWednesday);
-        mCalendarThursday = view.findViewById(R.id.calendarThursday);
-        mCalendarFriday = view.findViewById(R.id.calendarFriday);
-        mCalendarSaturday = view.findViewById(R.id.calendarSaturday);
-        mCalendarSunday = view.findViewById(R.id.calendarSunday);
+        RelativeLayout mCalendarMonday = view.findViewById(R.id.calendarMonday);
+        RelativeLayout mCalendarTuesday = view.findViewById(R.id.calendarTuesday);
+        RelativeLayout mCalendarWednesday = view.findViewById(R.id.calendarWednesday);
+        RelativeLayout mCalendarThursday = view.findViewById(R.id.calendarThursday);
+        RelativeLayout mCalendarFriday = view.findViewById(R.id.calendarFriday);
+        RelativeLayout mCalendarSaturday = view.findViewById(R.id.calendarSaturday);
+        RelativeLayout mCalendarSunday = view.findViewById(R.id.calendarSunday);
 
         days = new RelativeLayout[]{
                 mCalendarMonday,
@@ -113,8 +105,6 @@ public class LandscapeFragment extends Fragment {
         endCal = (Calendar) startCal.clone();
         endCal.add(Calendar.DAY_OF_YEAR, 8  );
 
-        Log.e("Dates", "" + startCal.get(Calendar.DAY_OF_MONTH) + "." + (startCal.get(Calendar.MONTH) + 1) + "." + startCal.get(Calendar.YEAR));
-        Log.e("Dates", "" + endCal.get(Calendar.DAY_OF_MONTH) + "." + (endCal.get(Calendar.MONTH) + 1) + "." + endCal.get(Calendar.YEAR));
         reloadData();
 
         return view;
@@ -142,35 +132,39 @@ public class LandscapeFragment extends Fragment {
 
             // Number of half hour timeslots
             int startTime = (start.get(Calendar.HOUR_OF_DAY) * 60) + start.get(Calendar.MINUTE);
+            // Offset from top in dp
             int topOff = (int) ((startTime / 30) * 15 * density);
 
             long duration = (end.getTimeInMillis() - start.getTimeInMillis()) / (1000 * 60);
+            // Height in dp
             int height = (int) ((duration / 30) * 15 * density);
 
             // Week starts at monday
             int index = (start.get(Calendar.DAY_OF_WEEK) + 5) % 7;
 
-            Log.e("Index", "" + index);
-            Log.e("Dimensions", "TopOff: " + topOff + " Height: " + height + " Duration: " + duration);
-
             params.setMargins(0, topOff, 0, 0);
-            params.height = height;
+            //TODO: Have to uncomment to get true height of event.  Based on duration.
+            //params.height = height;
 
+            // Choose better color for event
             view.setBackgroundColor(getResources().getColor(R.color.darkRed));
 
             view.setLayoutParams(params);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO: Respond to clicked event
+                    Log.e("Clicked event", "ID: " + e.getId() + " title: " + e.getTitle());
+                }
+            });
+
+            // Add event to correct day
             days[index].addView(view);
         }
     }
 
     private void reloadData() {
-        // Clear list view
-        ArrayAdapter<Event> clearEvents = new ArrayAdapter<Event>(
-                activity.getApplicationContext(),
-                android.R.layout.simple_list_item_1,
-                new ArrayList<Event>()
-        );
-
         String token = TokenStore.getToken(activity.getApplicationContext());
         c.getEvents(new Date(startCal.getTimeInMillis()), new Date(endCal.getTimeInMillis()), token, new Callback() {
             @Override
