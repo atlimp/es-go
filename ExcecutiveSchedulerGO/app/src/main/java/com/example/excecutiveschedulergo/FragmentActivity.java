@@ -1,5 +1,6 @@
 package com.example.excecutiveschedulergo;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -60,5 +61,11 @@ public class FragmentActivity extends AppCompatActivity {
         manager.beginTransaction()
                 .replace(R.id.fragment, f)
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent main = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(main);
     }
 }
