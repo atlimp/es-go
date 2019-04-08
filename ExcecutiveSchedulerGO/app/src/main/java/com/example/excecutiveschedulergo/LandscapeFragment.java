@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -19,11 +20,13 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,6 +40,10 @@ public class LandscapeFragment extends Fragment {
 
     RelativeLayout[] days;
     ScrollView mLandscapeScrollview;
+
+    Button mLandscapePrevButton;
+    Button mLandscapeNextButton;
+    TextView mLandscapeCurrentWeek;
 
     Connection c = Connection.getInstance();
 
@@ -80,6 +87,22 @@ public class LandscapeFragment extends Fragment {
                 + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
     }
 
+    private void setCurrWeek() {
+        Locale loc = new Locale("is", "IS");
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, loc);
+
+        String dateString = df.format(new Date(startCal.getTimeInMillis())) + " - " + df.format(new Date(endCal.getTimeInMillis()));
+
+        mLandscapeCurrentWeek.setText(dateString);
+    }
+
+    private String getTimeString(Date d1, Date d2) {
+        Locale loc = new Locale("is", "IS");
+        DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT, loc);
+
+        return df.format(d1) + " - " + df.format(d2);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,6 +127,28 @@ public class LandscapeFragment extends Fragment {
         Log.e("StartCal", print(startCal));
         Log.e("EndCal", print(endCal));
 
+        mLandscapeNextButton = view.findViewById(R.id.landscape_next_button);
+        mLandscapePrevButton = view.findViewById(R.id.landscape_prev_button);
+        mLandscapeCurrentWeek = view.findViewById(R.id.landscape_current_week);
+
+        mLandscapePrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCal.add(Calendar.DATE, -7);
+                endCal.add(Calendar.DATE, -7);
+                reloadData();
+            }
+        });
+
+        mLandscapeNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCal.add(Calendar.DATE, 7);
+                endCal.add(Calendar.DATE, 7);
+                reloadData();
+            }
+        });
+
         reloadData();
 
         activity.getSupportActionBar().hide();
@@ -125,7 +170,11 @@ public class LandscapeFragment extends Fragment {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.event_layout, null);
             TextView title = view.findViewById(R.id.event_landscape_title);
-            title.setText(e.toString());
+            TextView time = view.findViewById(R.id.event_landscape_time);
+
+            title.setText(e.getTitle());
+            time.setText(getTimeString(e.getStartDate(), e.getEndDate()));
+
 
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             float density = getResources().getDisplayMetrics().density;
@@ -147,6 +196,10 @@ public class LandscapeFragment extends Fragment {
             long duration = (end.getTimeInMillis() - start.getTimeInMillis()) / (1000 * 60);
             // Height in dp
             int height = (int) ((1.0 * duration / 60) * 30 * density);
+
+            int minHeight = (int) (60 * density);
+
+            height = height < minHeight ? minHeight : height;
 
             // Week starts at monday
             int index = (start.get(Calendar.DAY_OF_WEEK) + 5) % 7;
@@ -175,6 +228,12 @@ public class LandscapeFragment extends Fragment {
     }
 
     private void reloadData() {
+        setCurrWeek();
+
+        for (int i = 0; i < days.length; i++) {
+            days[i].removeAllViews();
+        }
+
         String token = TokenStore.getToken(activity.getApplicationContext());
         c.getEvents(new Date(startCal.getTimeInMillis()), new Date(endCal.getTimeInMillis()), token, new Callback() {
             @Override

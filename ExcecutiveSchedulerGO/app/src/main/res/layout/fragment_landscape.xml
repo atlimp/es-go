@@ -93,314 +93,349 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_weight="0.5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/landscape_prev_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/prev"/>
 
                     <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-                        android:layout_width="match_parent"
+                        android:id="@+id/landscape_current_week"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="01.01.1970"/>
 
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="00:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-                        android:layout_width="match_parent"
-
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="01:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="02:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="03:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="04:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="05:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="06:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="07:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="08:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="09:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="10:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="11:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="12:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="13:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="14:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="15:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="16:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="17:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="18:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="19:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="20:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="21:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/lightgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="22:00"/>
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:background="@color/darkgrey"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:layout_height="30dp"
-                        android:text="23:00"/>
+                    <Button
+                        android:id="@+id/landscape_next_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next"/>
 
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:id="@+id/calendarMonday"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/checkerboard1">
-                </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:id="@+id/calendarTuesday"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/checkerboard2">
-                </RelativeLayout>
+                    android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:id="@+id/calendarWednesday"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/checkerboard1">
-                </RelativeLayout>
+                    <LinearLayout
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:id="@+id/calendarThursday"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/checkerboard2">
-                </RelativeLayout>
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+                            android:layout_width="match_parent"
 
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:id="@+id/calendarFriday"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/checkerboard1">
-                </RelativeLayout>
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="00:00"/>
 
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:id="@+id/calendarSaturday"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/checkerboard2">
-                </RelativeLayout>
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+                            android:layout_width="match_parent"
 
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:id="@+id/calendarSunday"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/checkerboard1">
-                </RelativeLayout>
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="01:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="02:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="03:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="04:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="05:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="06:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="07:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="08:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="09:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="10:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="11:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="12:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="13:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="14:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="15:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="16:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="17:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="18:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="19:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="20:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="21:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/lightgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="22:00"/>
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:background="@color/darkgrey"
+
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:layout_height="30dp"
+                            android:text="23:00"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:id="@+id/calendarMonday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/checkerboard1">
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:id="@+id/calendarTuesday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/checkerboard2">
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:id="@+id/calendarWednesday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/checkerboard1">
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:id="@+id/calendarThursday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/checkerboard2">
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:id="@+id/calendarFriday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/checkerboard1">
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:id="@+id/calendarSaturday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/checkerboard2">
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:id="@+id/calendarSunday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/checkerboard1">
+                    </RelativeLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
+
         </ScrollView>
 
     </LinearLayout>
