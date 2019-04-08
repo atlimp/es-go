@@ -176,13 +176,13 @@ public class MainActivity extends AppCompatActivity {
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setLogin(TokenStore.getToken(getApplicationContext()) == null);
                 if (TokenStore.getToken(getApplicationContext()) != null) {
                     TokenStore.deleteToken(getApplicationContext());
                 } else {
                     Intent login = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(login);
                 }
+                setLogin(TokenStore.getToken(getApplicationContext()) == null);
             }
         });
     }
@@ -193,5 +193,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mLogin.setImageResource(R.drawable.ic_logouticon);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Gerum ekki neitt her
     }
 }

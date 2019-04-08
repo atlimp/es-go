@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -105,6 +106,8 @@ public class LandscapeFragment extends Fragment {
 
         reloadData();
 
+        activity.getSupportActionBar().hide();
+
         return view;
     }
 
@@ -117,7 +120,7 @@ public class LandscapeFragment extends Fragment {
 
         int yOff = (int) ((hour - 2) * 30 * getResources().getDisplayMetrics().density);
         mLandscapeScrollview.smoothScrollTo(0, yOff);
-            
+
         for (Event e : events) {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.event_layout, null);
@@ -156,8 +159,13 @@ public class LandscapeFragment extends Fragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO: Respond to clicked event
                     Log.e("Clicked event", "ID: " + e.getId() + " title: " + e.getTitle() + e.toString());
+                    activity.toolbar.event = e;
+
+                    if (view.isSelected())
+                        view.setSelected(false);
+                    else
+                        view.setSelected(true);
                 }
             });
 

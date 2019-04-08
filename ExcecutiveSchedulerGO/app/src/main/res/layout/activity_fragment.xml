@@ -21,7 +21,9 @@
         android:orientation="vertical"
         android:clickable="true">
 
-        <include layout="@layout/toolbar"/>
+        <include
+            android:id="@+id/calendar_toolbar"
+            layout="@layout/toolbar"/>
 
         <FrameLayout
             android:id="@+id/fragment"

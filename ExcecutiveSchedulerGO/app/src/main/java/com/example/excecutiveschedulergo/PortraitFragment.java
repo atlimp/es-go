@@ -45,7 +45,6 @@ public class PortraitFragment extends Fragment {
     View mPage;
 
     ListView mList;
-    Toolbar  toolbar;
     Connection c = Connection.getInstance();
 
     FragmentActivity activity;
@@ -77,7 +76,6 @@ public class PortraitFragment extends Fragment {
 
         mPage = activity.findViewById(R.id.page_root);
         mList = view.findViewById(R.id.list);
-        toolbar = new Toolbar(activity);
 
         mPrevButton = view.findViewById(R.id.prevDayButton);
         mNextButton = view.findViewById(R.id.nextDayButton);
@@ -122,7 +120,7 @@ public class PortraitFragment extends Fragment {
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                toolbar.event = (Event) parent.getItemAtPosition(position);
+                activity.toolbar.event = (Event) parent.getItemAtPosition(position);
                 mCardView.setVisibility(View.GONE);
             }
         });
