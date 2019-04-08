@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -41,6 +42,8 @@ import okhttp3.Response;
 
 public class PortraitFragment extends Fragment {
 
+    View mPage;
+
     ListView mList;
     Toolbar  toolbar;
     Connection c = Connection.getInstance();
@@ -56,6 +59,8 @@ public class PortraitFragment extends Fragment {
     Calendar startCal;
     Calendar endCal;
 
+    LinearLayout mCardView;
+
     public PortraitFragment() {
         // Required empty public constructor
     }
@@ -70,6 +75,7 @@ public class PortraitFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_portrait, container, false);
 
+        mPage = activity.findViewById(R.id.page_root);
         mList = view.findViewById(R.id.list);
         toolbar = new Toolbar(activity);
 
@@ -85,6 +91,8 @@ public class PortraitFragment extends Fragment {
         startCal = new GregorianCalendar(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
         endCal = (Calendar) startCal.clone();
         endCal.add(Calendar.DATE, 1);
+
+        mCardView = view.findViewById(R.id.CardView);
 
         setListeners();
 
@@ -102,11 +110,20 @@ public class PortraitFragment extends Fragment {
     }
 
     private void setListeners(){
+        mPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 toolbar.event = (Event) parent.getItemAtPosition(position);
-
+                mCardView.setVisibility(View.GONE);
             }
         });
 
@@ -117,7 +134,6 @@ public class PortraitFragment extends Fragment {
                 View whole = PortraitFragment.this.view;
 
                 Event event = (Event) parent.getItemAtPosition(position);
-                LinearLayout mCardView = whole.findViewById(R.id.CardView);
                 mCardView.setVisibility(View.VISIBLE);
                 TextView mTitle = whole.findViewById(R.id.CardTitle);
                 mTitle.setText(event.getTitle());
@@ -143,11 +159,10 @@ public class PortraitFragment extends Fragment {
             }
         });
 
-        LinearLayout mCard = view.findViewById(R.id.CardView);
-        mCard.setOnClickListener(new View.OnClickListener() {
+        mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCard.setVisibility(View.GONE);
+                mCardView.setVisibility(View.GONE);
             }
         });
 

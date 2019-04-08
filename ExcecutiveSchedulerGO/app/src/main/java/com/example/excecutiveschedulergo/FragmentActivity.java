@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -60,5 +61,16 @@ public class FragmentActivity extends AppCompatActivity {
         manager.beginTransaction()
                 .replace(R.id.fragment, f)
                 .commit();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        try {
+            Log.e("Fragment", "not null");
+            mPortaitFragment.mCardView.setVisibility(View.GONE);
+        } catch (NullPointerException e){
+            Log.e("Fragment", e.getMessage());
+        }
+        return true;
     }
 }

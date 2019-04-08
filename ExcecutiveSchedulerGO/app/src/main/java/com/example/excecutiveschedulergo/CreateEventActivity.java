@@ -414,4 +414,6 @@ public class CreateEventActivity extends AppCompatActivity {
         event.setStartDate(new Date(pickedStart));
         event.setEndDate(new Date(pickedEnd));
     }
+
+
 }
