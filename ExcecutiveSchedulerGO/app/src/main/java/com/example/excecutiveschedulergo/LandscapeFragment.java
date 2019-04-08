@@ -197,7 +197,7 @@ public class LandscapeFragment extends Fragment {
             // Height in dp
             int height = (int) ((1.0 * duration / 60) * 30 * density);
 
-            int minHeight = (int) (60 * density);
+            int minHeight = (int) (30 * density);
 
             height = height < minHeight ? minHeight : height;
 
