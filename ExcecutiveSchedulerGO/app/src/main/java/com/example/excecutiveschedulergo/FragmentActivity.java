@@ -91,4 +91,10 @@ public class FragmentActivity extends AppCompatActivity {
         Intent main = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(main);
     }
+
+    public void redirectToLogin() {
+        TokenStore.deleteToken(getApplicationContext());
+        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(login);
+    }
 }

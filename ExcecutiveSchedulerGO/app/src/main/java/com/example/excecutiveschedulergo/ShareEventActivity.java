@@ -82,6 +82,13 @@ public class ShareEventActivity extends AppCompatActivity {
                         }
                     });
                 } else {
+                    // If unauthorized redirect to login.
+                    int statusCode = response.code();
+                    if (statusCode == 401) {
+                        TokenStore.deleteToken(getApplicationContext());
+                        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(login);
+                    }
                     Log.e("Share event fail", json);
                 }
             }
@@ -217,6 +224,13 @@ public class ShareEventActivity extends AppCompatActivity {
                     startActivity(calendar);
 
                 } else {
+                    // If unauthorized redirect to login.
+                    int statusCode = response.code();
+                    if (statusCode == 401) {
+                        TokenStore.deleteToken(getApplicationContext());
+                        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(login);
+                    }
                     Log.e("Share event fail", json);
                 }
             }

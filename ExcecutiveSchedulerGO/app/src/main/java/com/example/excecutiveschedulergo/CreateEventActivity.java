@@ -291,6 +291,13 @@ public class CreateEventActivity extends AppCompatActivity {
                     Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 } else {
+                    // If unauthorized redirect to login.
+                    int statusCode = response.code();
+                    if (statusCode == 401) {
+                        TokenStore.deleteToken(getApplicationContext());
+                        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(login);
+                    }
                     Log.e("Create event", json);
                 }
             }
@@ -323,6 +330,13 @@ public class CreateEventActivity extends AppCompatActivity {
                     Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 } else {
+                    // If unauthorized redirect to login.
+                    int statusCode = response.code();
+                    if (statusCode == 401) {
+                        TokenStore.deleteToken(getApplicationContext());
+                        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(login);
+                    }
                     Log.e("Edit event", json);
                 }
             }
@@ -352,6 +366,13 @@ public class CreateEventActivity extends AppCompatActivity {
                     Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 } else {
+                    // If unauthorized redirect to login.
+                    int statusCode = response.code();
+                    if (statusCode == 401) {
+                        TokenStore.deleteToken(getApplicationContext());
+                        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(login);
+                    }
                     Log.e("Delete Event", json);
                 }
             }
