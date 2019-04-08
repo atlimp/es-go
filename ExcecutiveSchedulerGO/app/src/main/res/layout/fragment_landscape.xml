@@ -440,75 +440,63 @@
 
     </LinearLayout>
 
-
-
-
-
-
-
-
-
-<!--
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_landscape" />
-
     <LinearLayout
-        android:id="@+id/list_holder"
+        android:id="@+id/CardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/card_background"
         android:orientation="horizontal"
-        >
-        <ListView
-            android:id="@+id/labels"
-            android:layout_width="@dimen/labelWidth"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_margin="@dimen/cardMargin_landscape">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/border_ui"></ListView>
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/CardTitle"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:textSize="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/CardDescription"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/CardStartDate"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/CardEndDate"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <ListView
-            android:id="@+id/monday"
-            android:layout_width="@dimen/dayWidth"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_ui"></ListView>
+            android:layout_weight="1"
+            android:id="@+id/CardUsers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
 
-        <ListView
-            android:id="@+id/tuesday"
-            android:layout_width="@dimen/dayWidth"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_ui"></ListView>
+        </ListView>
 
-        <ListView
-            android:id="@+id/wednesday"
-            android:layout_width="@dimen/dayWidth"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_ui"></ListView>
-
-        <ListView
-            android:id="@+id/thursday"
-            android:layout_width="@dimen/dayWidth"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_ui"></ListView>
-
-        <ListView
-            android:id="@+id/friday"
-            android:layout_width="@dimen/dayWidth"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_ui"></ListView>
-
-        <ListView
-            android:id="@+id/saturday"
-            android:layout_width="@dimen/dayWidth"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_ui"></ListView>
-
-        <ListView
-            android:id="@+id/sunday"
-            android:layout_width="@dimen/dayWidth"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_ui"></ListView>
     </LinearLayout>
 
-    -->
 
 </FrameLayout>
