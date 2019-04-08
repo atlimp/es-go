@@ -12,7 +12,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.Adapters.ImageAdapter;
 import com.example.Connection.Connection;
 import java.io.IOException;
 import okhttp3.Call;
