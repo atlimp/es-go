@@ -109,28 +109,29 @@ public class PortraitFragment extends Fragment {
         });
 
 
-        //TODO: mCardView seems to be null.  App crashes on long click.
         mList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
+                View whole = PortraitFragment.this.view;
+
                 Event event = (Event) parent.getItemAtPosition(position);
-                LinearLayout mCardView = view.findViewById(R.id.CardView);
+                LinearLayout mCardView = whole.findViewById(R.id.CardView);
                 mCardView.setVisibility(View.VISIBLE);
-                TextView mTitle = view.findViewById(R.id.CardTitle);
+                TextView mTitle = whole.findViewById(R.id.CardTitle);
                 mTitle.setText(event.getTitle());
-                TextView mDescription = view.findViewById(R.id.CardDescription);
+                TextView mDescription = whole.findViewById(R.id.CardDescription);
                 mDescription.setText(event.getDescription());
-                TextView mStartDate = view.findViewById(R.id.CardStartDate);
+                TextView mStartDate = whole.findViewById(R.id.CardStartDate);
                 mStartDate.setText(dateString(event.getStartDate()));
-                TextView mEndDate = view.findViewById(R.id.CardEndDate);
+                TextView mEndDate = whole.findViewById(R.id.CardEndDate);
                 mEndDate.setText(dateString(event.getEndDate()));
 
                 // Set userlist on card
-                ListView mUserList = view.findViewById(R.id.CardUsers);
+                ListView mUserList = whole.findViewById(R.id.CardUsers);
                 List<User> users = event.getUsers();
 
                 ArrayAdapter<User> adapter = new ArrayAdapter<User>(
-                        getContext(),
+                        activity.getApplicationContext(),
                         android.R.layout.simple_list_item_1,
                         users
                 );
@@ -180,7 +181,7 @@ public class PortraitFragment extends Fragment {
 
         mList.setAdapter(clearEvents);
 
-        mCurrentDate.setText("" + startCal.get(Calendar.DAY_OF_MONTH) + "." + startCal.get(Calendar.MONTH) + "." + startCal.get(Calendar.YEAR));
+        mCurrentDate.setText("" + startCal.get(Calendar.HOUR_OF_DAY) + "." + startCal.get(Calendar.MINUTE));
 
         String token = TokenStore.getToken(activity.getApplicationContext());
         c.getEvents(new Date(startCal.getTimeInMillis()), new Date(endCal.getTimeInMillis()), token, new Callback() {
