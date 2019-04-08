@@ -408,7 +408,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private void setFields(){
         String title = mTitle.getText().toString();
-        if(title == null) title = "Title";
+        if(title == null || title.equals("")) title = "Title";
         event.setTitle(title);
         event.setDescription(mDescription.getText().toString());
         event.setStartDate(new Date(pickedStart));
