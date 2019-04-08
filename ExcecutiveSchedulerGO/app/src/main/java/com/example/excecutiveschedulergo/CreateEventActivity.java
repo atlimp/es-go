@@ -415,5 +415,10 @@ public class CreateEventActivity extends AppCompatActivity {
         event.setEndDate(new Date(pickedEnd));
     }
 
+    public void onBackPressed() {
+        Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
+        startActivity(calendar);
+    }
+
 
 }

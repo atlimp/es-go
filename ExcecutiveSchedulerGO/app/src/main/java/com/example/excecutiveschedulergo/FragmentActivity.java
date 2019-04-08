@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 public class FragmentActivity extends AppCompatActivity {
 
     private LandscapeFragment mLandscapeFragment;
-    private PortraitFragment mPortaitFragment;
+    private PortraitFragment mPortraitFragment;
 
     public Toolbar toolbar;
 
@@ -28,9 +28,9 @@ public class FragmentActivity extends AppCompatActivity {
         toolbar = new Toolbar(this);
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            mPortaitFragment = new PortraitFragment();
-            mPortaitFragment.setActivity(this);
-            setFragment(mPortaitFragment);
+            mPortraitFragment = new PortraitFragment();
+            mPortraitFragment.setActivity(this);
+            setFragment(mPortraitFragment);
         }
         else {
             mLandscapeFragment = new LandscapeFragment();
@@ -61,11 +61,11 @@ public class FragmentActivity extends AppCompatActivity {
             //mCalendarToolbar.setVisibility(View.VISIBLE);
 
             Log.e("Fragment", "portrait");
-            if (mPortaitFragment == null) {
-                mPortaitFragment = new PortraitFragment();
-                mPortaitFragment.setActivity(this);
+            if (mPortraitFragment == null) {
+                mPortraitFragment = new PortraitFragment();
+                mPortraitFragment.setActivity(this);
             }
-            setFragment(mPortaitFragment);
+            setFragment(mPortraitFragment);
         }
     }
 
@@ -77,14 +77,16 @@ public class FragmentActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         try {
             Log.e("Fragment", "not null");
-            mPortaitFragment.mCardView.setVisibility(View.GONE);
-        } catch (NullPointerException e){
+            mPortraitFragment.mCardView.setVisibility(View.GONE);
+        } catch (NullPointerException e) {
             Log.e("Fragment", e.getMessage());
         }
         return true;
+    }
+
     public void onBackPressed() {
         Intent main = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(main);

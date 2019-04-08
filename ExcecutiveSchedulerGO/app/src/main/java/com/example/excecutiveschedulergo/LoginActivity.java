@@ -272,4 +272,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+        Intent main = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(main);
+    }
 }
