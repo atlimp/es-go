@@ -153,7 +153,7 @@ public class ShareEventActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.v("Share event success", json);
                     // Redirectum aftur i calendar view eftir ad vid shareum event
-                    Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                    Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
 
                 } else {

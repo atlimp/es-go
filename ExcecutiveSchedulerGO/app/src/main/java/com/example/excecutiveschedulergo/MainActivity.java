@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent login = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(login);
                 } else{
-                    Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                    Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 }
             }
