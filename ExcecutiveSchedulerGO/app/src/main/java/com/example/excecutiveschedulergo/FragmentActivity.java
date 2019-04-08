@@ -19,10 +19,16 @@ public class FragmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
-
-        mPortaitFragment = new PortraitFragment();
-        mPortaitFragment.setActivity(this);
-        setFragment(mPortaitFragment);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            mPortaitFragment = new PortraitFragment();
+            mPortaitFragment.setActivity(this);
+            setFragment(mPortaitFragment);
+        }
+        else {
+            mLandscapeFragment = new LandscapeFragment();
+            mLandscapeFragment.setActivity(this);
+            setFragment(mLandscapeFragment);
+        }
     }
 
     @Override
