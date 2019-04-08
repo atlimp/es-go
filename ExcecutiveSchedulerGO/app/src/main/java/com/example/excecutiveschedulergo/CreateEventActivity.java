@@ -62,6 +62,7 @@ public class CreateEventActivity extends AppCompatActivity {
         toolbar = new Toolbar(this);
         setListeners();
         purpose = setPurpose(getIntent());
+        mTimePicker.setIs24HourView(true);
     }
 
     private void setListeners() {
@@ -207,6 +208,7 @@ public class CreateEventActivity extends AppCompatActivity {
                         break;
                     case 2:
                         shareEvent();
+                        finish();
                         break;
                     case 3:
                         finish();
@@ -227,6 +229,9 @@ public class CreateEventActivity extends AppCompatActivity {
         mStartDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTimePicker.setVisibility(View.GONE);
+                mSetTimeButton.setVisibility(View.GONE);
+                pickedStart = calendar.getTimeInMillis();
                 pickStart = true;
                 mStartDate.setVisibility(View.VISIBLE);
                 mSetDateButton.setVisibility(View.VISIBLE);
@@ -237,11 +242,13 @@ public class CreateEventActivity extends AppCompatActivity {
         mEndDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTimePicker.setVisibility(View.GONE);
+                mSetTimeButton.setVisibility(View.GONE);
+                pickedEnd = pickedStart;
                 pickStart = false;
                 Log.v("CreateEventActivity.mEndDateText.onClick: ", pickStart.toString());
                 mStartDate.setVisibility(View.VISIBLE);
                 mSetDateButton.setVisibility(View.VISIBLE);
-                //mEndDate.setMinDate(pickedStart);
                 mUpperInfo.setVisibility(View.GONE);
             }
         });
@@ -400,7 +407,9 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void setFields(){
-        event.setTitle(mTitle.getText().toString());
+        String title = mTitle.getText().toString();
+        if(title == null || title.equals("")) title = "Title";
+        event.setTitle(title);
         event.setDescription(mDescription.getText().toString());
         event.setStartDate(new Date(pickedStart));
         event.setEndDate(new Date(pickedEnd));
