@@ -134,8 +134,8 @@ public class Connection {
     }
 
     public void deleteEvent(Event event, String token, Callback c) {
-        String endPoint = "/event/" + event.getId();
-        this.post(endPoint, token, c);
+        String endPoint = "/event/" + event.getId() + "/delete/";
+        this.delete(endPoint, token, c);
     }
 
     public void getEvents(Date startDate, Date endDate, String token, Callback c) {

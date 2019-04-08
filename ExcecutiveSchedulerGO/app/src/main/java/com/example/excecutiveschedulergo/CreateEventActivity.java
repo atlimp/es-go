@@ -28,6 +28,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private Button mButton;
     private Button mCancel;
+    private Button mDelete;
 
     private EditText mTitle;
     private EditText mDescription;
@@ -180,8 +181,9 @@ public class CreateEventActivity extends AppCompatActivity {
 
         //mEndDate = findViewById(R.id.create_endDate);
 
-        mButton = findViewById(R.id.create_button);
+        mButton = findViewById(R.id.confirm_button);
         mCancel = findViewById(R.id.cancel_button);
+        mDelete  = findViewById(R.id.delete_button);
 
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +212,14 @@ public class CreateEventActivity extends AppCompatActivity {
                         finish();
                         break;
                 }
+            }
+        });
+
+        mDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("Delete Event","");
+                deleteEvent();
             }
         });
 

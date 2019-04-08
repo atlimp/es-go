@@ -12,7 +12,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="41dp">
 
         <include layout="@layout/toolbar" />
 
@@ -160,21 +162,31 @@
 
 
                 <Button
-                    android:id="@+id/create_button"
+                    android:id="@+id/confirm_button"
                     android:background="@android:color/holo_green_light"
-                    android:layout_width="135dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="@string/create" />
+                    android:text="@string/confirm" />
 
                 <Button
                     android:id="@+id/cancel_button"
                     android:background="@android:color/holo_red_dark"
-                    android:layout_width="135dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="@string/cancel" />
+
+                <Button
+                    android:id="@+id/delete_button"
+                    android:background="@color/lightgrey"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/delete" />
             </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 
