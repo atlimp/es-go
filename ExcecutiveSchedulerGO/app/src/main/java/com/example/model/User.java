@@ -83,12 +83,10 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags){
-        out.writeLong(id);
         out.writeString(name);
         out.writeString(username);
         out.writeString(password);
         out.writeString(token);
-        out.writeList(events);
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>(){

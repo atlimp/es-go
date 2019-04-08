@@ -181,7 +181,7 @@ public class PortraitFragment extends Fragment {
 
         mList.setAdapter(clearEvents);
 
-        mCurrentDate.setText("" + startCal.get(Calendar.DAY_OF_MONTH) + "." + startCal.get(Calendar.MONTH) + "." + startCal.get(Calendar.YEAR));
+        mCurrentDate.setText("" + startCal.get(Calendar.HOUR_OF_DAY) + "." + startCal.get(Calendar.MINUTE));
 
         String token = TokenStore.getToken(activity.getApplicationContext());
         c.getEvents(new Date(startCal.getTimeInMillis()), new Date(endCal.getTimeInMillis()), token, new Callback() {
