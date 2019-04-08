@@ -340,12 +340,12 @@ public class CreateEventActivity extends AppCompatActivity {
                 String json = response.body().string();
 
                 if (response.isSuccessful()) {
-                    Log.v("Delete event", json);
-                    // Þegar notandi hefur klárað að edita event er honum redirectað í calendar
-                    //Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
-                    //startActivity(calendar);
+                    Log.e("Delete Event", json);
+                    // Þegar notandi hefur klárað að deleta event er honum redirectað í calendar
+                    Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
+                    startActivity(calendar);
                 } else {
-                    Log.e("Delete event", json);
+                    Log.e("Delete Event", json);
                 }
             }
         });
@@ -369,6 +369,7 @@ public class CreateEventActivity extends AppCompatActivity {
         switch(num){
             case 0:
                 //create
+                mDelete.setVisibility(View.GONE);
                 break;
             case 1:
                 //edit
