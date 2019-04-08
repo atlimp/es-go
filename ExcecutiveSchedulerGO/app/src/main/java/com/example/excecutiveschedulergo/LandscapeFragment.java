@@ -8,13 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.Connection.Connection;
 import com.example.model.Event;
+import com.example.model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -50,6 +55,10 @@ public class LandscapeFragment extends Fragment {
     Calendar startCal;
     Calendar endCal;
 
+    View view;
+
+    LinearLayout mCardView;
+
     List<Event> events;
 
     public void setActivity(FragmentActivity activity) {
@@ -80,13 +89,6 @@ public class LandscapeFragment extends Fragment {
         };
     }
 
-    private String print(Calendar c) {
-        return
-                c.get(Calendar.DAY_OF_MONTH) + "." + (c.get(Calendar.MONTH) + 1)
-                + "." + c.get(Calendar.YEAR) + "  " + c.get(Calendar.HOUR_OF_DAY)
-                + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
-    }
-
     private void setCurrWeek() {
         Locale loc = new Locale("is", "IS");
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, loc);
@@ -106,12 +108,27 @@ public class LandscapeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_landscape, container, false);
+        view = inflater.inflate(R.layout.fragment_landscape, container, false);
 
         initDays(view);
 
         mLandscapeScrollview = view.findViewById(R.id.landscape_scrollview);
+        mCardView = view.findViewById(R.id.CardView);
+        mLandscapeNextButton = view.findViewById(R.id.landscape_next_button);
+        mLandscapePrevButton = view.findViewById(R.id.landscape_prev_button);
+        mLandscapeCurrentWeek = view.findViewById(R.id.landscape_current_week);
 
+        setListeners();
+        setDate();
+        reloadData();
+
+        // Hide title
+        activity.getSupportActionBar().hide();
+
+        return view;
+    }
+
+    private void setDate() {
         Calendar today = new GregorianCalendar();
 
         startCal = new GregorianCalendar(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
@@ -123,13 +140,16 @@ public class LandscapeFragment extends Fragment {
         endCal.add(Calendar.HOUR_OF_DAY, 23);
         endCal.add(Calendar.MINUTE, 59);
         endCal.add(Calendar.SECOND, 59);
+    }
 
-        Log.e("StartCal", print(startCal));
-        Log.e("EndCal", print(endCal));
+    private void setListeners() {
+        mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCardView.setVisibility(View.GONE);
+            }
+        });
 
-        mLandscapeNextButton = view.findViewById(R.id.landscape_next_button);
-        mLandscapePrevButton = view.findViewById(R.id.landscape_prev_button);
-        mLandscapeCurrentWeek = view.findViewById(R.id.landscape_current_week);
 
         mLandscapePrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,12 +168,14 @@ public class LandscapeFragment extends Fragment {
                 reloadData();
             }
         });
+    }
 
-        reloadData();
+    private String dateString(Date date) {
+        Locale loc = new Locale("is", "IS");
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, loc);
+        DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, loc);
 
-        activity.getSupportActionBar().hide();
-
-        return view;
+        return dateFormat.format(date) + " " + timeFormat.format(date);
     }
 
     private void setEvents(List<Event> events) {
@@ -161,6 +183,8 @@ public class LandscapeFragment extends Fragment {
     }
 
     private void updateUI() {
+
+        // Scroll to correct hour
         int hour = new GregorianCalendar().get(Calendar.HOUR_OF_DAY);
 
         int yOff = (int) ((hour - 2) * 30 * getResources().getDisplayMetrics().density);
@@ -184,9 +208,6 @@ public class LandscapeFragment extends Fragment {
 
             Calendar end = new GregorianCalendar();
             end.setTime(e.getEndDate());
-
-            Log.e("StartTime", print(start));
-            Log.e("EndTime", print(end));
 
             // Number of half hour timeslots
             int startTime = (start.get(Calendar.HOUR_OF_DAY) * 60) + start.get(Calendar.MINUTE);
@@ -219,6 +240,36 @@ public class LandscapeFragment extends Fragment {
                         view.setSelected(false);
                     else
                         view.setSelected(true);
+                }
+            });
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    View whole = LandscapeFragment.this.view;
+
+                    mCardView.setVisibility(View.VISIBLE);
+                    TextView mTitle = whole.findViewById(R.id.CardTitle);
+                    mTitle.setText(e.getTitle());
+                    TextView mDescription = whole.findViewById(R.id.CardDescription);
+                    mDescription.setText(e.getDescription());
+                    TextView mStartDate = whole.findViewById(R.id.CardStartDate);
+                    mStartDate.setText(dateString(e.getStartDate()));
+                    TextView mEndDate = whole.findViewById(R.id.CardEndDate);
+                    mEndDate.setText(dateString(e.getEndDate()));
+
+                    // Set userlist on card
+                    ListView mUserList = whole.findViewById(R.id.CardUsers);
+                    List<User> users = e.getUsers();
+
+                    ArrayAdapter<User> adapter = new ArrayAdapter<User>(
+                            activity.getApplicationContext(),
+                            android.R.layout.simple_list_item_1,
+                            users
+                    );
+
+                    mUserList.setAdapter(adapter);
+                    return true;
                 }
             });
 
