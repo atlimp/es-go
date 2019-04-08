@@ -9,16 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class FragmentActivity extends AppCompatActivity {
 
     private LandscapeFragment mLandscapeFragment;
     private PortraitFragment mPortaitFragment;
 
+    public Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
+
+        toolbar = new Toolbar(this);
+
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             mPortaitFragment = new PortraitFragment();
             mPortaitFragment.setActivity(this);
@@ -40,12 +46,18 @@ public class FragmentActivity extends AppCompatActivity {
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Log.e("Fragment", "landscape");
+
+            //mCalendarToolbar.setVisibility(View.GONE);
+
             if (mLandscapeFragment == null) {
                 mLandscapeFragment = new LandscapeFragment();
                 mLandscapeFragment.setActivity(this);
             }
             setFragment(mLandscapeFragment);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+
+            //mCalendarToolbar.setVisibility(View.VISIBLE);
+
             Log.e("Fragment", "portrait");
             if (mPortaitFragment == null) {
                 mPortaitFragment = new PortraitFragment();
