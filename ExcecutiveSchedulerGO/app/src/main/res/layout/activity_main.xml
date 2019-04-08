@@ -7,11 +7,47 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_margin="@android:dimen/app_icon_size"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center_vertical">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/calendar"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                />
+            <ImageView
+                android:id="@+id/create"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/login"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                />
+
+        </LinearLayout>
+        <!--
         <GridView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/the_grid"
@@ -49,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="fragments"/>
-
+            -->
     </LinearLayout>
 
 

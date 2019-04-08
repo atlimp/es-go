@@ -20,11 +20,11 @@ import com.example.excecutiveschedulergo.TokenStore;
 public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
-    private Boolean mLogged;
+
 
     // Keep all Images in array
     public Integer[] mThumbIds = {
-            R.drawable.ic_calendaricon,
+            R.drawable.ic_calendar,
             R.drawable.ic_createnewicon,
             R.drawable.ic_loginicon
     };
@@ -32,7 +32,6 @@ public class ImageAdapter extends BaseAdapter {
     // Constructor
     public ImageAdapter(Context c, Boolean logged) {
         mContext = c;
-        mLogged = logged;
         setLogin(logged);
     }
 
@@ -44,6 +43,8 @@ public class ImageAdapter extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
+        GridView gv = parent.findViewById(R.id.the_grid);
+        gv.setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, 200));
         ImageView imageView;
 
         if (convertView == null) {
@@ -105,10 +106,8 @@ public class ImageAdapter extends BaseAdapter {
     public void setLogin(Boolean logged){
         if(logged) {
             mThumbIds[2] = R.drawable.ic_loginicon;
-            mLogged = false;
         } else {
             mThumbIds[2] = R.drawable.ic_logouticon;
-            mLogged = true;
         } notifyDataSetChanged();
     }
 }
