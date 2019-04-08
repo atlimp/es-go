@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingVertical="10dp"
+    android:layout_marginVertical="100dp"
     android:background="@color/blue"
     >
 
