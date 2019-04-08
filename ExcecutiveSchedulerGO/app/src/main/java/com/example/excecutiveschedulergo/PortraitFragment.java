@@ -2,6 +2,7 @@ package com.example.excecutiveschedulergo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -120,6 +122,7 @@ public class PortraitFragment extends Fragment {
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 activity.toolbar.event = (Event) parent.getItemAtPosition(position);
                 mCardView.setVisibility(View.GONE);
             }
@@ -130,7 +133,6 @@ public class PortraitFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
                 View whole = PortraitFragment.this.view;
-
                 Event event = (Event) parent.getItemAtPosition(position);
                 mCardView.setVisibility(View.VISIBLE);
                 TextView mTitle = whole.findViewById(R.id.CardTitle);

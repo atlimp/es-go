@@ -30,19 +30,16 @@ public class ListViewAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        return mEvents.size();  //listview item count.
+        return mEvents.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return mEvents.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return mEvents.get(position).getId();
     }
 
@@ -71,6 +68,10 @@ public class ListViewAdapter extends BaseAdapter {
         DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT, loc);
 
         return timeFormat.format(date);
+    }
+
+    private void color(){
+
     }
 
 }
