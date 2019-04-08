@@ -11,14 +11,19 @@ import com.example.excecutiveschedulergo.PortraitFragment;
 import com.example.excecutiveschedulergo.R;
 import com.example.model.Event;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter {
     LayoutInflater mInflater;
-    ArrayList<Event> mEvents;
+    List<Event> mEvents;
 
 
-    public ListViewAdapter(Activity activity, ArrayList<Event> events)
+    public ListViewAdapter(Activity activity, List<Event> events)
     {
         mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mEvents = events;
@@ -43,31 +48,30 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
-        final ViewHolder vh;
-        vh= new ViewHolder();
-
-        if(convertView==null )
-        {
-            convertView = mInflater.inflate(R.layout.row, parent,false);
-            //inflate custom layour
-            vh.tv2= (TextView)convertView.findViewById(R.id.textView2);
-
+        if(convertView == null){
+            convertView = mInflater.inflate(R.layout.row, parent, false);
         }
-        else
-        {
-            convertView.setTag(vh);
-        }
-        //vh.tv2.setText("Position = "+position);
-        vh.tv2.setText(mEvents.get(position).getTitle());
-        //set text of second textview based on position
+        Event event = mEvents.get(position);
+        TextView tv1 = convertView.findViewById(R.id.textView1);
+        TextView tv2 = convertView.findViewById(R.id.textView2);
+
+        tv1.setText(event.getTitle());
+
+        String start = dateString(event.getStartDate());
+        String end = dateString(event.getEndDate());
+
+
+        tv2.setText(start + " - " + end);
 
         return convertView;
     }
 
-    class ViewHolder
-    {
-        TextView tv1,tv2;
+    private String dateString(Date date) {
+        Locale loc = new Locale("is", "IS");
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, loc);
+        DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT, loc);
+
+        return timeFormat.format(date);
     }
 
 }
