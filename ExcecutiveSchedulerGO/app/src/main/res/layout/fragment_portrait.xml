@@ -43,7 +43,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:choiceMode="singleChoice"
-            android:listSelector="@color/yellow"></ListView>
+            android:listSelector="@color/yellow"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp"></ListView>
 
     </LinearLayout>
 
