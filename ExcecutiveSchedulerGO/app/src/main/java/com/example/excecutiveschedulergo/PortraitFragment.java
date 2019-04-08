@@ -1,5 +1,6 @@
 package com.example.excecutiveschedulergo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.Connection.Connection;
+import com.example.adapters.ListViewAdapter;
 import com.example.model.Event;
 import com.example.model.User;
 import com.google.gson.Gson;
@@ -173,15 +175,11 @@ public class PortraitFragment extends Fragment {
         mCalendarProgress.setVisibility(View.VISIBLE);
 
         // Clear list view
-        ArrayAdapter<Event> clearEvents = new ArrayAdapter<Event>(
-                activity.getApplicationContext(),
-                android.R.layout.simple_list_item_1,
-                new ArrayList<Event>()
-        );
+        ListViewAdapter clearEvents = new ListViewAdapter(activity, new ArrayList<Event>());
 
         mList.setAdapter(clearEvents);
 
-        mCurrentDate.setText("" + startCal.get(Calendar.HOUR_OF_DAY) + "." + startCal.get(Calendar.MINUTE));
+        mCurrentDate.setText("" + startCal.get(Calendar.DAY_OF_MONTH) + "." + startCal.get(Calendar.MONTH) + "." + startCal.get(Calendar.YEAR));
 
         String token = TokenStore.getToken(activity.getApplicationContext());
         c.getEvents(new Date(startCal.getTimeInMillis()), new Date(endCal.getTimeInMillis()), token, new Callback() {
@@ -202,11 +200,7 @@ public class PortraitFragment extends Fragment {
                     List events = gson.fromJson(json, type);
                     Log.e("List size", "" + events.size());
 
-                    ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(
-                            activity.getApplicationContext(),
-                            android.R.layout.simple_list_item_1,
-                            events
-                    );
+                    ListViewAdapter adapter = new ListViewAdapter(activity, events);
 
                     activity.runOnUiThread(new Runnable() {
                         @Override

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -85,10 +86,9 @@ public class Event implements Parcelable {
      */
     public String toString() {
         Locale loc = new Locale("is", "IS");
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, loc);
-
-        return this.title + "\n" +
-                dateFormat.format(this.startDate) + " - " + dateFormat.format(this.endDate);
+        DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT, loc);
+        return this.title + "\n\n" +
+                timeFormat.format(this.startDate) + " - " + timeFormat.format(this.endDate);
     }
 
     /**
