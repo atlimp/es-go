@@ -313,6 +313,11 @@ public class LandscapeFragment extends Fragment {
                         }
                     });
                 } else {
+                    // If unauthorized redirect to login.
+                    int statusCode = response.code();
+                    if (statusCode == 401) {
+                        activity.redirectToLogin();
+                    }
                     Log.e("Get events", json);
                 }
             }
