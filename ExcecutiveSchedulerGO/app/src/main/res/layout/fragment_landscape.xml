@@ -95,7 +95,7 @@
 
                 <LinearLayout
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -635,7 +635,7 @@
                     android:id="@+id/calendarMonday"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lightgrey">
+                    android:background="@drawable/checkerboard2">
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -643,7 +643,7 @@
                     android:id="@+id/calendarTuesday"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/darkgrey">
+                    android:background="@drawable/checkerboard2">
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -651,7 +651,7 @@
                     android:id="@+id/calendarWednesday"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lightgrey">
+                    android:background="@drawable/checkerboard2">
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -659,7 +659,7 @@
                     android:id="@+id/calendarThursday"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/darkgrey">
+                    android:background="@drawable/checkerboard2">
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -667,7 +667,7 @@
                     android:id="@+id/calendarFriday"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lightgrey">
+                    android:background="@drawable/checkerboard2">
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -675,7 +675,7 @@
                     android:id="@+id/calendarSaturday"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/darkgrey">
+                    android:background="@drawable/checkerboard2">
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -683,7 +683,7 @@
                     android:id="@+id/calendarSunday"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lightgrey">
+                    android:background="@drawable/checkerboard2">
                 </RelativeLayout>
 
             </LinearLayout>

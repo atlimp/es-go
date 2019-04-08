@@ -89,6 +89,12 @@ public class LandscapeFragment extends Fragment {
         };
     }
 
+    private String print(Calendar c) {
+        return
+                c.get(Calendar.DAY_OF_MONTH) + "." + (c.get(Calendar.MONTH) + 1)
+                + "." + c.get(Calendar.YEAR) + "  " + c.get(Calendar.HOUR_OF_DAY)
+                + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,10 +106,17 @@ public class LandscapeFragment extends Fragment {
         Calendar today = new GregorianCalendar();
 
         startCal = new GregorianCalendar(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
-        startCal.add(Calendar.DAY_OF_YEAR, -startCal.get(Calendar.DAY_OF_WEEK));
+        int dayOfWeek = (startCal.get(Calendar.DAY_OF_WEEK) + 5) % 7;
+        startCal.add(Calendar.DAY_OF_YEAR, dayOfWeek);
 
         endCal = (Calendar) startCal.clone();
-        endCal.add(Calendar.DAY_OF_YEAR, 8  );
+        endCal.add(Calendar.DAY_OF_YEAR, 6);
+        endCal.add(Calendar.HOUR_OF_DAY, 23);
+        endCal.add(Calendar.MINUTE, 59);
+        endCal.add(Calendar.SECOND, 59);
+
+        Log.e("StartCal", print(startCal));
+        Log.e("EndCal", print(endCal));
 
         reloadData();
 
@@ -119,7 +132,7 @@ public class LandscapeFragment extends Fragment {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.event_layout, null);
             TextView title = view.findViewById(R.id.event_landscape_title);
-            title.setText(e.getTitle());
+            title.setText(e.toString());
 
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             float density = getResources().getDisplayMetrics().density;
@@ -129,6 +142,9 @@ public class LandscapeFragment extends Fragment {
 
             Calendar end = new GregorianCalendar();
             end.setTime(e.getEndDate());
+
+            Log.e("StartTime", print(start));
+            Log.e("EndTime", print(end));
 
             // Number of half hour timeslots
             int startTime = (start.get(Calendar.HOUR_OF_DAY) * 60) + start.get(Calendar.MINUTE);
@@ -143,11 +159,7 @@ public class LandscapeFragment extends Fragment {
             int index = (start.get(Calendar.DAY_OF_WEEK) + 5) % 7;
 
             params.setMargins(0, topOff, 0, 0);
-            //TODO: Have to uncomment to get true height of event.  Based on duration.
-            //params.height = height;
-
-            // Choose better color for event
-            view.setBackgroundColor(getResources().getColor(R.color.darkRed));
+            params.height = height;
 
             view.setLayoutParams(params);
 
@@ -155,7 +167,7 @@ public class LandscapeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     //TODO: Respond to clicked event
-                    Log.e("Clicked event", "ID: " + e.getId() + " title: " + e.getTitle());
+                    Log.e("Clicked event", "ID: " + e.getId() + " title: " + e.getTitle() + e.toString());
                 }
             });
 

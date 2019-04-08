@@ -86,14 +86,9 @@ public class Event implements Parcelable {
      */
     public String toString() {
         Locale loc = new Locale("is", "IS");
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, loc);
-        Calendar start = Calendar.getInstance();
-        start.setTimeInMillis(startDate.getTime());
-
-        Calendar end = Calendar.getInstance();
-        end.setTimeInMillis(startDate.getTime());
+        DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT, loc);
         return this.title + "\n\n" +
-                start.HOUR + ":" + start.MINUTE + " - " + end.HOUR + ":" + end.MINUTE;
+                timeFormat.format(this.startDate) + " - " + timeFormat.format(this.endDate);
     }
 
     /**
