@@ -3,6 +3,7 @@ package com.example.excecutiveschedulergo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.text.Editable;
 
 import com.example.model.User;
 
@@ -35,6 +37,9 @@ public class ShareEventActivity extends AppCompatActivity {
     private Button mButton;
     private ListView mUserlist, mShareduserlist;
     private ArrayList<String> sharedusers;
+    private ArrayList<String> users = new ArrayList<>();
+    private ArrayList<String> usersSearch;
+    private String searchstring = "";
 
     private Toolbar toolbar;
     private Connection c = Connection.getInstance();
@@ -60,9 +65,11 @@ public class ShareEventActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     Type type = new TypeToken<ArrayList<User>>(){}.getType();
-                    List users = gson.fromJson(json, type);
-                    Log.e("Users", "" + users);
-                    String s = users.toString();
+                    ArrayList<User> user = gson.fromJson(json, type);
+
+                    for(int i = 0; i < user.size(); i++) {
+                        users.add(user.get(i).getUsername());
+                    }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                             ShareEventActivity.this,
                             android.R.layout.simple_list_item_1,
@@ -93,13 +100,37 @@ public class ShareEventActivity extends AppCompatActivity {
                 }
             }
         });
+        mUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchstring = s.toString().toLowerCase();
+                usersSearch = new ArrayList<>();
+                Log.e("error", users.toString());
+                for(int i = 0; i < users.size(); i++){
+                    String uname = users.get(i);
+                    if(uname.contains(searchstring)){
+                        usersSearch.add(uname);
+                    }
+                    updateUserList();
+                }
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         mUserlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sharedusers.add(parent.getItemAtPosition(position).toString());
-                displayShared();
-
+                String user = parent.getItemAtPosition(position).toString();
+                if(!sharedusers.contains(user)){
+                    sharedusers.add(user);
+                    displayShared();
+                }
             }
         });
 
@@ -134,6 +165,35 @@ public class ShareEventActivity extends AppCompatActivity {
                 mShareduserlist.setAdapter(adapter);
             }
         });
+    }
+
+    private void updateUserList() {
+        if(!searchstring.equals("")){
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    ShareEventActivity.this,
+                    android.R.layout.simple_list_item_1,
+                    usersSearch
+            );
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mUserlist.setAdapter(adapter);
+                }
+            });
+        } else {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    ShareEventActivity.this,
+                    android.R.layout.simple_list_item_1,
+                    users
+            );
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mUserlist.setAdapter(adapter);
+                }
+            });
+        }
+
     }
 
     private void shareEvent() {
