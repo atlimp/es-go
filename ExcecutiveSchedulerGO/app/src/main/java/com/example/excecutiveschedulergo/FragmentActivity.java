@@ -77,14 +77,15 @@ public class FragmentActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         try {
             Log.e("Fragment", "not null");
             mPortaitFragment.mCardView.setVisibility(View.GONE);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("Fragment", e.getMessage());
         }
         return true;
+    }
     public void onBackPressed() {
         Intent main = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(main);
