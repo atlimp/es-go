@@ -68,7 +68,6 @@ public class ListViewAdapter extends BaseAdapter {
 
     private String dateString(Date date) {
         Locale loc = new Locale("is", "IS");
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, loc);
         DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT, loc);
 
         return timeFormat.format(date);
