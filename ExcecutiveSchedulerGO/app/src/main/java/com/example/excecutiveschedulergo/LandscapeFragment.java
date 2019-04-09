@@ -295,6 +295,8 @@ public class LandscapeFragment extends Fragment {
     private void reloadData() {
         setCurrWeek();
 
+        eventViews.clear();
+
         for (int i = 0; i < days.length; i++) {
             days[i].removeAllViews();
         }
