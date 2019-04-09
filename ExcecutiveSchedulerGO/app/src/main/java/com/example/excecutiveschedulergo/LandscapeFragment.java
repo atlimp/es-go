@@ -60,6 +60,7 @@ public class LandscapeFragment extends Fragment {
     LinearLayout mCardView;
 
     List<Event> events;
+    List<View> eventViews;
 
     public void setActivity(FragmentActivity activity) {
         this.activity = activity;
@@ -117,6 +118,8 @@ public class LandscapeFragment extends Fragment {
         mLandscapeNextButton = view.findViewById(R.id.landscape_next_button);
         mLandscapePrevButton = view.findViewById(R.id.landscape_prev_button);
         mLandscapeCurrentWeek = view.findViewById(R.id.landscape_current_week);
+
+        eventViews = new ArrayList<View>();
 
         setListeners();
         setDate();
@@ -178,6 +181,13 @@ public class LandscapeFragment extends Fragment {
         return dateFormat.format(date) + " " + timeFormat.format(date);
     }
 
+    private void unselectAll(View view) {
+        for (View v : eventViews) {
+            if (v != view)
+                v.setSelected(false);
+        }
+    }
+
     private void setEvents(List<Event> events) {
         this.events = events;
     }
@@ -236,6 +246,8 @@ public class LandscapeFragment extends Fragment {
                     Log.e("Clicked event", "ID: " + e.getId() + " title: " + e.getTitle() + e.toString());
                     activity.toolbar.event = e;
 
+                    unselectAll(view);
+
                     if (view.isSelected())
                         view.setSelected(false);
                     else
@@ -272,6 +284,8 @@ public class LandscapeFragment extends Fragment {
                     return true;
                 }
             });
+
+            eventViews.add(view);
 
             // Add event to correct day
             days[index].addView(view);
