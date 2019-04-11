@@ -151,6 +151,11 @@ public class CreateEventActivity extends AppCompatActivity {
                 } else {
                     mEndDateText.setText(calendar.getTime().toString());
                     pickedEnd = calendar.getTimeInMillis();
+                    // Always keep end of event at least equal to start
+                    if (pickedEnd < pickedStart) {
+                        pickedStart = pickedEnd;
+                        mStartDateText.setText(calendar.getTime().toString());
+                    }
                 }
             }
         });
@@ -428,6 +433,11 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void setFields(){
+        if(pickedEnd < pickedStart) {
+            long temp = pickedStart;
+            pickedStart = pickedEnd;
+            pickedEnd = temp;
+        }
         String title = mTitle.getText().toString();
         if(title == null || title.equals("")) title = "Title";
         event.setTitle(title);
