@@ -136,7 +136,7 @@ public class LandscapeFragment extends Fragment {
 
         startCal = new GregorianCalendar(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
         int dayOfWeek = (startCal.get(Calendar.DAY_OF_WEEK) + 5) % 7;
-        startCal.add(Calendar.DAY_OF_YEAR, dayOfWeek);
+        startCal.add(Calendar.DAY_OF_YEAR, -dayOfWeek);
 
         endCal = (Calendar) startCal.clone();
         endCal.add(Calendar.DAY_OF_YEAR, 6);
@@ -214,10 +214,10 @@ public class LandscapeFragment extends Fragment {
             float density = getResources().getDisplayMetrics().density;
 
             Calendar start = new GregorianCalendar();
-            start.setTime(e.getStartDate());
+            start.setTimeInMillis(e.getStartDate().getTime());
 
             Calendar end = new GregorianCalendar();
-            end.setTime(e.getEndDate());
+            end.setTimeInMillis(e.getEndDate().getTime());
 
             // Number of half hour timeslots
             int startTime = (start.get(Calendar.HOUR_OF_DAY) * 60) + start.get(Calendar.MINUTE);
@@ -230,13 +230,15 @@ public class LandscapeFragment extends Fragment {
 
             int minHeight = (int) (30 * density);
 
-            height = height < minHeight ? minHeight : height;
-
             // Week starts at monday
             int index = (start.get(Calendar.DAY_OF_WEEK) + 5) % 7;
 
             params.setMargins(0, topOff, 0, 0);
-            params.height = height;
+
+            if (height < minHeight)
+                params.height = minHeight;
+            else
+                params.height = height;
 
             view.setLayoutParams(params);
 
