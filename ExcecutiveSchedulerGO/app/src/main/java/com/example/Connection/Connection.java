@@ -1,15 +1,11 @@
 package com.example.Connection;
 
-import android.content.SharedPreferences;
 import android.util.Log;
-
-import com.example.excecutiveschedulergo.TokenStore;
 import com.example.model.Event;
 import com.example.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import java.io.IOException;
@@ -23,8 +19,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
 
+/**
+ * Singleton, provides connection to back end
+ */
 public class Connection {
 
     private static Connection instance = new Connection();
@@ -40,12 +38,10 @@ public class Connection {
         return instance;
     }
 
-    /*
+    /**
     Connections to backend using OkHTTP to create HTTP requests
     obj is request body
      */
-
-
     private void post(String endPoint, Object obj, Callback c) {
         OkHttpClient client = new OkHttpClient();
 

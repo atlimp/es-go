@@ -8,6 +8,10 @@ import android.content.SharedPreferences;
  * Has been heavily modified.
  */
 
+/**
+ * Stores auth token in sharedpreferences.  Provides methods to
+ * get, set and delete token.
+ */
 public class TokenStore {
 
     private static final String PREF_NAME = "TOKEN";

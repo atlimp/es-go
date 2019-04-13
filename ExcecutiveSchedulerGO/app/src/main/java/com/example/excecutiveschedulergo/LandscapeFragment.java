@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -41,9 +39,12 @@ import okhttp3.Response;
 
 public class LandscapeFragment extends Fragment {
 
-    FragmentActivity activity;
+    private FragmentActivity activity;
 
-    RelativeLayout[] days;
+    // Relative layouts corresponding to days
+    private RelativeLayout[] days;
+
+    // Needed for autoscroll
     ScrollView mLandscapeScrollview;
 
     Button mLandscapePrevButton;
@@ -90,6 +91,9 @@ public class LandscapeFragment extends Fragment {
         };
     }
 
+    /**
+     * Sets text of the current week
+     */
     private void setCurrWeek() {
         Locale loc = new Locale("is", "IS");
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, loc);
@@ -99,6 +103,12 @@ public class LandscapeFragment extends Fragment {
         mLandscapeCurrentWeek.setText(dateString);
     }
 
+    /**
+     *
+     * @param d1 date from
+     * @param d2 date to
+     * @return String representation of times, e.g. 00:00 - 01:00
+     */
     private String getTimeString(Date d1, Date d2) {
         Locale loc = new Locale("is", "IS");
         DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT, loc);
@@ -131,6 +141,9 @@ public class LandscapeFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Set the date to and from for current week.
+     */
     private void setDate() {
         Calendar today = new GregorianCalendar();
 
@@ -181,6 +194,10 @@ public class LandscapeFragment extends Fragment {
         return dateFormat.format(date) + " " + timeFormat.format(date);
     }
 
+    /**
+     * Unselects all eventviews except for parameter
+     * @param view view that has been clicked on
+     */
     private void unselectAll(View view) {
         for (View v : eventViews) {
             if (v != view)
@@ -201,6 +218,7 @@ public class LandscapeFragment extends Fragment {
         mLandscapeScrollview.smoothScrollTo(0, yOff);
 
         for (Event e : events) {
+            // Get event layout
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.event_layout, null);
             TextView title = view.findViewById(R.id.event_landscape_title);
@@ -219,11 +237,12 @@ public class LandscapeFragment extends Fragment {
             Calendar end = new GregorianCalendar();
             end.setTimeInMillis(e.getEndDate().getTime());
 
-            // Number of half hour timeslots
+            // Minutes since midnight
             int startTime = (start.get(Calendar.HOUR_OF_DAY) * 60) + start.get(Calendar.MINUTE);
             // Offset from top in dp
             int topOff = (int) ((1.0 * startTime / 60) * 30 * density);
 
+            // Duration in minutes
             long duration = (end.getTimeInMillis() - start.getTimeInMillis()) / (1000 * 60);
             // Height in dp
             int height = (int) ((1.0 * duration / 60) * 30 * density);
@@ -242,6 +261,7 @@ public class LandscapeFragment extends Fragment {
 
             view.setLayoutParams(params);
 
+            // Select event for toolbar
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -257,6 +277,7 @@ public class LandscapeFragment extends Fragment {
                 }
             });
 
+            // Display cardview on long click
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
