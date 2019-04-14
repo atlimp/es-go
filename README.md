@@ -8,4 +8,5 @@ Executive scheduler GO is an android version of the executive scheduler webapp.
 4. Choose emulator
 
 The apk should connect to the heroku backend by itself. <br>
-Create user to login and start using es-go
+Create user to login and start using es-go. <br>
+The final presentation is in es-go folder under the name "Presentation_HBV601G.pdf".
