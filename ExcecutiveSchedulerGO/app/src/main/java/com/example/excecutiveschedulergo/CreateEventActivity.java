@@ -10,48 +10,49 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
-
 import com.example.Connection.Connection;
 import com.example.model.Event;
-
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Set;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+/**
+ * This activity serves one of three possible purposes.
+ * It can create, edit or share an event.
+ * The activity is called with an int in the extras that will specify
+ * its purpose. In the event of edit or share the extras will also contain
+ * a parcelable Event object.
+ */
 public class CreateEventActivity extends AppCompatActivity {
 
-    private Button mButton;
-    private Button mCancel;
-    private Button mDelete;
+    private Button mButton;             // Modifies event
+    private Button mCancel;             // Cancels modification
+    private Button mDelete;             // Deletes current event
+    private EditText mTitle;            // Title textbox for edit or create
+    private EditText mDescription;      // Description textbox for edit or create
+    private LinearLayout mUpperInfo;    // Upper textboxes
+    private Button mStartDateText;      // Button that pops up datePicker
+    private Button mEndDateText;        // also contains current dateTime of event
+    private DatePicker mStartDate;      // DatePicker for both start and end dates
+    private TimePicker mTimePicker;     // TimePicker for both start and end
+    private Button mSetDateButton;      // Sets date and pops up timePicker
+    private Button mSetTimeButton;      // Sets time and hides timePicker
+    private Toolbar toolbar;            // create edit share and logout buttons
 
-    private EditText mTitle;
-    private EditText mDescription;
-    private Button mStartDateText;
-    private Button mEndDateText;
-    private DatePicker mStartDate;
-    private TimePicker mTimePicker;
-    private Button mSetDateButton;
-    private Button mSetTimeButton;
-    private DatePicker mEndDate;
-    private LinearLayout mUpperInfo;
-    private Toolbar toolbar;
+    private Boolean pickStart;          // Are we picking start or end date
+    private long pickedStart;           // Start date that has been piked
+    private long pickedEnd;             // End date that has been picked
 
-    private Boolean pickStart;
+    private Event event;                // Event that is being created or modified
 
-    private long pickedStart;
-    private long pickedEnd;
-
-    private Event event;
-
+    // Parts of date for calculations
     private int year, month, day, hour, minute;
-    private int purpose;
+    private int purpose;                // Purpose included in extras
 
+    // Singleton connection to database
     private final Connection c = Connection.getInstance();
 
     @Override
@@ -59,21 +60,26 @@ public class CreateEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
-        toolbar = new Toolbar(this);
-        setListeners();
-        purpose = setPurpose(getIntent());
-        mTimePicker.setIs24HourView(true);
+        toolbar = new Toolbar(this);    // Toolbar created for this activity
+        setListeners();                         // All component listeners set
+        purpose = setPurpose(getIntent());      // Purpose set
+        mTimePicker.setIs24HourView(true);      // TimePicker appearance
     }
 
+    /**
+     * Sets all xml components and component listeners
+     */
     private void setListeners() {
 
-        mUpperInfo = findViewById(R.id.upper_info);
-        mTitle = findViewById(R.id.create_title);
-        mDescription = findViewById(R.id.create_description);
+        mUpperInfo = findViewById(R.id.upper_info);             // Layout holding 2 textBoxes
+        mTitle = findViewById(R.id.create_title);               // Title textBox inside mUpperInfo
+        mDescription = findViewById(R.id.create_description);   // Description tb inside mUpperInfo
 
+        // Date buttons
         mStartDateText = findViewById(R.id.startDateTextBox);
         mEndDateText = findViewById(R.id.endDateTextBox);
 
+        // DatePicker
         mStartDate = findViewById(R.id.create_startDate);
 
         // Set variables with current date.
@@ -86,9 +92,11 @@ public class CreateEventActivity extends AppCompatActivity {
         mStartDateText.setText(calendar.getTime().toString());
         mEndDateText.setText(calendar.getTime().toString());
 
+        // Current event start and end
         pickedStart = calendar.getTimeInMillis();
         pickedEnd = calendar.getTimeInMillis();
 
+        // When textBox is chosen, remove string so user can input hs own
         mTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -138,7 +146,6 @@ public class CreateEventActivity extends AppCompatActivity {
         });
 
         mTimePicker = findViewById(R.id.time_picker);
-
         mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int _hour, int _minute) {
@@ -148,6 +155,11 @@ public class CreateEventActivity extends AppCompatActivity {
                 if (pickStart) {
                     mStartDateText.setText(calendar.getTime().toString());
                     pickedStart = calendar.getTimeInMillis();
+                    // Always keep end of event at least equal to start
+                    if (pickedEnd < pickedStart) {
+                        pickedEnd = pickedStart;
+                        mEndDateText.setText(calendar.getTime().toString());
+                    }
                 } else {
                     mEndDateText.setText(calendar.getTime().toString());
                     pickedEnd = calendar.getTimeInMillis();
@@ -160,6 +172,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
+        // Control component visibility when picking dates
         mSetDateButton = findViewById(R.id.set_date_button);
         mSetDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +184,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
+        // Control visibility and set dateTime
         mSetTimeButton = findViewById(R.id.set_time_button);
         mSetTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,13 +198,11 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-
-        //mEndDate = findViewById(R.id.create_endDate);
-
         mButton = findViewById(R.id.confirm_button);
         mCancel = findViewById(R.id.cancel_button);
         mDelete  = findViewById(R.id.delete_button);
 
+        // Cancels event modification and calls FragmentActivity
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,6 +212,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
+        // Modifies event according to purpose variable from extras
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,6 +235,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
+        // Deletes event
         mDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,6 +245,7 @@ public class CreateEventActivity extends AppCompatActivity {
         });
 
         // Click listeners for date text boxes (Buttons).
+        // Controls visibility
         mStartDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -259,24 +274,14 @@ public class CreateEventActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Creates a new event and updates backend
+     */
     private void createEvent() {
-        /**
-         Calendar start = new GregorianCalendar(
-         mStartDate.getYear(),
-         mStartDate.getMonth(),
-         mStartDate.getDayOfMonth()
-         );
-
-         Calendar end = new GregorianCalendar(
-         mEndDate.getYear(),
-         mEndDate.getMonth(),
-         mEndDate.getDayOfMonth()
-         );
-        */
-
         event = new Event();
         setFields();
 
+        // Backend authentication
         String token = TokenStore.getToken(this.getApplicationContext());
 
         Log.e("Token: ", token);
@@ -292,7 +297,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     Log.v("Create event", json);
-                    // Þegar búið er að gera event er notandanum síðan redirectað aftur í calendar.
+                    // When event has been created user is redirected back to FragmentActivity
                     Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 } else {
@@ -311,7 +316,6 @@ public class CreateEventActivity extends AppCompatActivity {
 
     /**
      * Finds event in backend and saves the new data to it.
-     * @param
      */
     private void editEvent(){
         //TODO: unite code between methods.
@@ -331,7 +335,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     Log.v("Edit event", json);
-                    // Þegar notandi hefur klárað að edita event er honum redirectað í calendar
+                    // When event has been edited user is redirected back to FragmentActivity
                     Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 } else {
@@ -350,6 +354,9 @@ public class CreateEventActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Deletes event and updates backend
+     */
     public void deleteEvent(){
         //TODO: unite code between methods.
 
@@ -367,7 +374,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     Log.e("Delete Event", json);
-                    // Þegar notandi hefur klárað að deleta event er honum redirectað í calendar
+                    // When event has been deleted user is redirected back to FragmentActivity
                     Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
                     startActivity(calendar);
                 } else {
@@ -387,7 +394,6 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void shareEvent(){
-        //TODO: Hide elements and replace with user list, add user button and textfield.
         editEvent();
     }
 
@@ -432,7 +438,11 @@ public class CreateEventActivity extends AppCompatActivity {
         return num;
     }
 
+    /**
+     * Sets current events fields
+     */
     private void setFields(){
+        // Make sure event starts before it ends
         if(pickedEnd < pickedStart) {
             long temp = pickedStart;
             pickedStart = pickedEnd;
@@ -446,6 +456,9 @@ public class CreateEventActivity extends AppCompatActivity {
         event.setEndDate(new Date(pickedEnd));
     }
 
+    /**
+     * Go back to FragmentActivity, not last Activity.
+     */
     public void onBackPressed() {
         Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
         startActivity(calendar);
