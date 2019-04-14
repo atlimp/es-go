@@ -22,8 +22,8 @@ import java.util.Locale;
  * and sorts events by time
  */
 public class ListViewAdapter extends BaseAdapter {
-    LayoutInflater mInflater;
-    List<Event> mEvents;        // List of events
+    private LayoutInflater mInflater;
+    private List<Event> mEvents;        // List of events
 
 
     public ListViewAdapter(Activity activity, List<Event> events)
