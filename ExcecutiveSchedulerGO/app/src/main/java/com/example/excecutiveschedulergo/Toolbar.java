@@ -6,15 +6,21 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.model.Event;
 
+/**
+ * Toolbar is inserted into activities and used as part of activity it is inserted into
+ */
 public class Toolbar {
 
-    private Activity    activity;
-    public  Event       event;
-    public  Button      mCreate, mEdit, mShare, mLogout;
+    private Activity    activity;                           // Activity assigned to toolbar
+    public  Event       event;                              // Event set in activity
+    public  Button      mCreate, mEdit, mShare, mLogout;    // Buttons pressed in activity
 
+    /**
+     * Constructor sets components, listeners and activity
+     * @param _activity
+     */
     public Toolbar(Activity _activity){
         mCreate  = _activity.findViewById(R.id.create_event);
         mEdit    = _activity.findViewById(R.id.edit_event);
@@ -24,6 +30,11 @@ public class Toolbar {
         setListeners();
     }
 
+    /**
+     * Constructor that behaves differently if activity is mainActivity
+     * @param _activity
+     * @param isMain
+     */
     public Toolbar(Activity _activity, boolean isMain) {
         mCreate  = _activity.findViewById(R.id.create_event);
         mEdit    = _activity.findViewById(R.id.edit_event);
@@ -35,7 +46,6 @@ public class Toolbar {
         mEdit.setVisibility(View.GONE);
         mShare.setVisibility(View.GONE);
 
-
         setListeners();
     }
 
@@ -45,19 +55,18 @@ public class Toolbar {
      */
     public void setListeners(){
 
+        // Opens createEventActivity with purpose create
         mCreate.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(activity.getApplicationContext(), CreateEventActivity.class);
                 intent.putExtra("Type", 0);
-                //Bundle bundle = new Bundle();
-                //bundle.putInt("Type", 0);
-                //intent.putExtras(bundle);
                 activity.startActivity(intent);
                 activity.finish();
             }
         });
 
+        // Opens createEventActivity with purpose Edit
         mEdit.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -70,15 +79,12 @@ public class Toolbar {
                 Intent intent = new Intent(context, CreateEventActivity.class);
                 intent.putExtra("Event", event);
                 intent.putExtra("Type", 1);
-                // Bundle bundle = new Bundle();
-                //bundle.putInt("Type", 1);
-                //bundle.putParcelable("Event", event);
-                //intent.putExtras(bundle);
                 activity.startActivity(intent);
                 activity.finish();
             }
         });
 
+        // Opens shareEventActivity
         mShare.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -90,15 +96,12 @@ public class Toolbar {
                 }
                 Intent intent = new Intent(context, ShareEventActivity.class);
                 intent.putExtra("Event", event);
-                //Bundle bundle = new Bundle();
-                //bundle.putInt("Type", 2);
-                //bundle.putParcelable("Event", event);
-                //intent.putExtras(bundle);
                 activity.startActivity(intent);
                 activity.finish();
             }
         });
 
+        // Logs out user
         mLogout.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){

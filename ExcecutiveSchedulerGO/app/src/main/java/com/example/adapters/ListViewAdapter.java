@@ -29,7 +29,7 @@ public class ListViewAdapter extends BaseAdapter {
     public ListViewAdapter(Activity activity, List<Event> events)
     {
         mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mEvents = events;
+        mEvents = events;               // List of events
         // Sort the list of events
         Collections.sort(mEvents, new Comparator<Event>() {
             public int compare(Event left, Event right)  {

@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 /**
  * This activity serves one of three possible purposes.
- * It can create, edit or share an event.
+ * It can create or edit an event.
  * The activity is called with an int in the extras that will specify
  * its purpose. In the event of edit or share the extras will also contain
  * a parcelable Event object.
@@ -224,10 +224,6 @@ public class CreateEventActivity extends AppCompatActivity {
                     case 1:
                         editEvent();
                         break;
-                    case 2:
-                        shareEvent();
-                        finish();
-                        break;
                     case 3:
                         finish();
                         break;
@@ -393,9 +389,6 @@ public class CreateEventActivity extends AppCompatActivity {
 
     }
 
-    private void shareEvent(){
-        editEvent();
-    }
 
     /**
      * Sets Activity layout according to int passed when the activity
@@ -424,11 +417,6 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 pickedStart = sd.getTime();
                 pickedEnd = ed.getTime();
-                break;
-            case 2:
-                //share
-                event = (Event) intent.getParcelableExtra("Event");
-                mButton.setText("Share");
                 break;
             case -1:
                 // Shouldn't happen.
