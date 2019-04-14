@@ -5,30 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.example.Connection.Connection;
-import java.io.IOException;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
+/**
+ * Shows options for the user to choose from and
+ * sends him to the appropriate activity
+ */
 public class MainActivity extends AppCompatActivity {
-    /**
-    protected Button mLoginButton;
-    private Button mCalendarButton;
-    private Button mCreateEventButton;
-    private GridView mGridView;
-     */
 
-    ImageView mCalendar;
-    ImageView mCreate;
-    ImageView mLogin;
+    private ImageView mCalendar;        // Clickable icon for FragmentActivity
+    private ImageView mCreate;          // Clickable icon for CreateEventActivity
+    private ImageView mLogin;           // Clickable icon for LoginActivity
+    // Singleton connection
     private final Connection c = Connection.getInstance();
 
     @Override
@@ -36,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Set icons
         mCalendar = findViewById(R.id.calendar);
         mCalendar.setImageResource(R.drawable.ic_calendar);
 
@@ -44,106 +34,32 @@ public class MainActivity extends AppCompatActivity {
 
         mLogin = findViewById(R.id.login);
         mLogin.setImageResource(R.drawable.ic_loginicon);
-
-
-        /**
-        // Create gridview for front page options
-        mGridView = findViewById(R.id.the_grid);
-        ImageAdapter adapter = new ImageAdapter(this, TokenStore.getToken(getApplicationContext()) != null);
-        mGridView.setAdapter(adapter);
-
-
-
-        mLoginButton = findViewById(R.id.login_button);
-        mCalendarButton = findViewById(R.id.calendar_button);
-        mCreateEventButton = findViewById(R.id.create_event_button);
-
-
-        updateLoginButtonText();
-
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.setLogin(TokenStore.getToken(getApplicationContext()) == null);
-                if (TokenStore.getToken(getApplicationContext()) != null) {
-                    TokenStore.deleteToken(getApplicationContext());
-                    updateLoginButtonText();
-                }
-                else {
-                    Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(login);
-                }
-            }
-        });
-
-        mCalendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(TokenStore.getToken(getApplicationContext()) == null){
-                    Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(login);
-                } else{
-                    Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
-                    startActivity(calendar);
-                }
-            }
-        });
-
-        mCreateEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(TokenStore.getToken(getApplicationContext()) == null){
-                    Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(login);
-                } else {
-                    Intent createEvent = new Intent(getApplicationContext(), CreateEventActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("Type", 0);
-                    createEvent.putExtras(bundle);
-                    startActivity(createEvent);
-                }
-            }
-        });
-
-        Button fragments = findViewById(R.id.fragments);
-        fragments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent createEvent = new Intent(getApplicationContext(), FragmentActivity.class);
-                startActivity(createEvent);
-            }
-        });
-         */
     }
 
-
+    /**
+     * Log activity stopping
+     */
     @Override
     protected void onStop(){
         super.onStop();
         Log.e("Main activity on stop: ", "stopped");
     }
 
+    /**
+     * Set login icons drawable svg and sets component listeners
+     */
     @Override
     protected void onStart() {
         super.onStart();
         setLogin(TokenStore.getToken(getApplicationContext()) == null);
         setListeners();
-        //updateLoginButtonText();
     }
 
     /**
-    // Fall sem uppfærir login takkann eftir því hvort notandi sé loggaður inn.
-    protected void updateLoginButtonText() {
-        if(TokenStore.getToken(getApplicationContext()) == null) {
-            mLoginButton.setText("Login");
-        }
-        else {
-            mLoginButton.setText("Logout");
-        }
-    }
-    */
-
+     * Set component listeners
+     */
     private void setListeners(){
+        // Check if logged in and open FragmentActivity or redirect to LoginActivity
         mCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // Check if logged in and open CreateEventActivity or redirect ot LoginActivity
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // Sends user to LoginActivity, if token is not null it is deleted
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set login icons drawable
+     * @param logged
+     */
     public void setLogin(Boolean logged){
         if(logged) {
             mLogin.setImageResource(R.drawable.ic_loginicon);
@@ -195,8 +115,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Nowhere to go back to
+     */
     @Override
     public void onBackPressed() {
-        // Gerum ekki neitt her
+        // Nothing here
     }
 }
