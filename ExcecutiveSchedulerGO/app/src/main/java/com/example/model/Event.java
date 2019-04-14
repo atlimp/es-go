@@ -5,11 +5,13 @@ import android.os.Parcelable;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Model class for Event
+ */
 public class Event implements Parcelable {
 
     private Long id;
@@ -19,10 +21,22 @@ public class Event implements Parcelable {
     private String description;
     private List<User> users;
 
+    /**
+     * Empty constructor to create empty event
+     */
     public Event() {
 
     }
 
+    /**
+     * Constructor for transfer from backend
+     * @param id
+     * @param startDate
+     * @param endDate
+     * @param title
+     * @param description
+     * @param users
+     */
     public Event(Long id, Date startDate, Date endDate, String title, String description, List<User> users) {
         this.id = id;
         this.startDate = startDate;
@@ -100,6 +114,11 @@ public class Event implements Parcelable {
         return 0;
     }
 
+    /**
+     * Must be in same order as createFromParcel
+     * @param out
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel out,  int flags){
         out.writeLong(id);

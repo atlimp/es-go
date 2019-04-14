@@ -2,10 +2,11 @@ package com.example.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * User model class
+ */
 public class User implements Parcelable {
 
     private Long id;
@@ -15,10 +16,20 @@ public class User implements Parcelable {
     private String token;
     private List<Event> events;
 
+    /**
+     * Empty constructor for empty user
+     */
     public User()  {
 
     }
 
+    /**
+     * Constructor for transferring from backend
+     * @param username
+     * @param name
+     * @param password
+     * @param token
+     */
     public User(String username, String name, String password, String token) {
         this.username = username;
         this.name = name;
@@ -81,6 +92,11 @@ public class User implements Parcelable {
         return 0;
     }
 
+    /**
+     * Must be in same order as createFromParcel
+     * @param out
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel out, int flags){
         out.writeString(name);
