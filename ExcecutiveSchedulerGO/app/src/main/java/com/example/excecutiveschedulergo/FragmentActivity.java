@@ -8,25 +8,26 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
+/**
+ * Shows daily or weekly events based on screen orientation
+ */
 public class FragmentActivity extends AppCompatActivity {
 
-    private LandscapeFragment mLandscapeFragment;
-    private PortraitFragment mPortraitFragment;
+    private LandscapeFragment mLandscapeFragment;   // Fragment loaded if orientation is landscape
+    private PortraitFragment mPortraitFragment;     // Fragment loaded if orientation is portrait
 
-    public Toolbar toolbar;
+    public Toolbar toolbar;                         // Toolbar inserted into activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
+        // Toolbar holds current event and buttons to modify event or logout
         toolbar = new Toolbar(this);
 
+        // Load relevant fragment
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             mPortraitFragment = new PortraitFragment();
             mPortraitFragment.setActivity(this);
@@ -39,6 +40,10 @@ public class FragmentActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * When orientation changes load relevant fragment
+     * @param newConfig
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -69,6 +74,10 @@ public class FragmentActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets given fragment to layout
+     * @param f
+     */
     private void setFragment(Fragment f) {
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -76,6 +85,12 @@ public class FragmentActivity extends AppCompatActivity {
                 .commit();
     }
 
+    /**
+     * Attempt to make entire activity responsive to setting visibility of cardView
+     * (see fragments)
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         try {
@@ -87,11 +102,17 @@ public class FragmentActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Go back to main instead of last screen
+     */
     public void onBackPressed() {
         Intent main = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(main);
     }
 
+    /**
+     * Redirect to loginActivity
+     */
     public void redirectToLogin() {
         TokenStore.deleteToken(getApplicationContext());
         Intent login = new Intent(getApplicationContext(), LoginActivity.class);
