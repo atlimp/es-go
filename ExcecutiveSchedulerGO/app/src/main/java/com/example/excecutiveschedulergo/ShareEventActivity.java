@@ -10,38 +10,35 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.text.Editable;
-
 import com.example.model.User;
-
 import com.example.Connection.Connection;
 import com.example.model.Event;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+/**
+ * Share event with other users
+ */
 public class ShareEventActivity extends AppCompatActivity {
 
-    private EditText mUsername;
-    private Button mButton;
-    private ListView mUserlist, mShareduserlist;
-    private ArrayList<String> sharedusers;
-    private ArrayList<String> users = new ArrayList<>();
-    private ArrayList<String> usersSearch;
-    private String searchstring = "";
+    private EditText mUsername;                         // Input for user search
+    private Button mButton;                             // Done button
+    private ListView mUserlist, mShareduserlist;        // Lists of users
+    private ArrayList<String> sharedusers;              // Array to fill mSharedUserList
+    private ArrayList<String> users = new ArrayList<>();// Array to fill mUserList
+    private ArrayList<String> usersSearch;              // Array for search results
+    private String searchstring = "";                   // String from mUsername
 
-    private Toolbar toolbar;
+    private Toolbar toolbar;                            // Toolbar inserted
+    // Singleton connection
     private Connection c = Connection.getInstance();
 
     @Override
@@ -97,6 +94,9 @@ public class ShareEventActivity extends AppCompatActivity {
         setListeners();
     }
 
+    /**
+     * Set components and component listeners
+     */
     private void setListeners() {
         mUsername = findViewById(R.id.share_event_text);
         mUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -174,6 +174,9 @@ public class ShareEventActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Called if there are changes to the user arrays
+     */
     private void updateUserList() {
         if(!searchstring.equals("")){
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -203,6 +206,9 @@ public class ShareEventActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Update event on backend
+     */
     private void shareEvent() {
         String token = TokenStore.getToken(this.getApplicationContext());
         Event event = (Event) (getIntent()).getParcelableExtra("Event");
@@ -237,6 +243,9 @@ public class ShareEventActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Always go back to FragmentActivity
+     */
     public void onBackPressed() {
         Intent calendar = new Intent(getApplicationContext(), FragmentActivity.class);
         startActivity(calendar);
